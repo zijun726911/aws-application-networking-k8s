@@ -1,0 +1,78 @@
+# alias k2_account_b='kubectl --context arn:aws:eks:us-west-2:348739612106:cluster/cluster-2'
+# alias k1_account_a='kubectl --context arn:aws:eks:us-west-2:018212172037:cluster/cluster-1'
+
+# ada credentials update --once --provider isengard --role Admin  --account 348739612106
+# k2_account_b apply -f examples/demo/c/step1-in-accountB-cluster-2.yaml
+# export LATTICE_SERVICE_DNS=$(k2_account_b get httproute my-httproute -o json | jq -r '.metadata.annotations["application-networking.k8s.aws/lattice-assigned-domain-name"]') && echo $LATTICE_SERVICE_DNS
+
+# k2_account_b delete -f examples/demo/c/step1-in-accountB-cluster-2.yaml
+
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: Gateway
+metadata:
+  name: my-gateway-2
+  annotations:
+    application-networking.k8s.aws/lattice-vpc-association: "true"
+spec:
+  gatewayClassName: amazon-vpc-lattice
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+
+---
+
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: my-httproute
+spec:
+  parentRefs:
+    - name: my-gateway-2
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: service2
+          kind: Service
+      matches:
+        - path:
+            type: PathPrefix
+            value: /service-2-from-account-b-cluster-2
+
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service2
+  labels:
+    app: service2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service2
+  template:
+    metadata:
+      labels:
+        app: service2
+    spec:
+      containers:
+        - name: service2
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "service2 pod from cluster 2"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service2
+spec:
+  selector:
+    app: service2
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090

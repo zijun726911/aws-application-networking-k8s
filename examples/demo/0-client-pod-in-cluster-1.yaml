@@ -1,0 +1,17 @@
+# alias k1='kubectl --context arn:aws:eks:us-west-2:348739612106:cluster/cluster-1'
+# alias k2='kubectl --context arn:aws:eks:us-west-2:348739612106:cluster/cluster-2'
+# k1 apply -f examples/demo/0-client-pod-in-cluster-1.yaml
+
+# k1 delete -f examples/demo/0-client-pod-in-cluster-1.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client
+  labels:
+    app: client
+spec:
+  containers:
+    - name: client-container
+      image: public.ecr.aws/x2j8p8w7/http-server:latest
+
+

@@ -1,0 +1,45 @@
+# k2 apply -f examples/demo/b/step3-in-cluster-2.yaml
+# export LATTICE_SERVICE_DNS=$(k1 get httproute my-httproute -o json | jq -r '.metadata.annotations["application-networking.k8s.aws/lattice-assigned-domain-name"]') && echo $LATTICE_SERVICE_DNS
+
+#  while true; do k1 exec client -- curl $LATTICE_SERVICE_DNS 2>/dev/null; sleep 1; done
+
+# k2 delete -f examples/demo/b/step3-in-cluster-2.yaml
+
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: Gateway
+metadata:
+  name: my-gateway
+  annotations:
+    application-networking.k8s.aws/lattice-vpc-association: "true"
+spec:
+  gatewayClassName: amazon-vpc-lattice
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+---
+
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: my-httproute
+spec:
+  parentRefs:
+    - name: my-gateway
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: service1-v2
+          kind: ServiceImport
+
+
+---
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceImport
+metadata:
+  name: service1-v2
+spec:
+  type: ClusterSetIP
+  ports:
+    - port: 80
+      protocol: TCP

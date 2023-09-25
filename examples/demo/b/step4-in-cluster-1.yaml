@@ -1,0 +1,18 @@
+# helm uninstall gateway-api-controller --namespace aws-application-networking-system  --kube-context arn:aws:eks:us-west-2:348739612106:cluster/cluster-1
+#  k1 edit httproute my-httproute (remove finalizers)
+# k1 edit gateway my-gateway (remove finalizers)
+# k1 edit serviceimport service1-v1 (remove finalizers)
+# k1 edit serviceExport service1-v1 (remove finalizers)
+
+# k1 delete -f examples/demo/b/step0-assume-in-cluster-1.yaml
+# k1 delete -f examples/demo/b/step2-in-cluster-1.yaml
+# go to the lattice console: delete the target group k8s-service1
+# go to the lattice console: delete the SNVA
+
+# re-install the gateway controller in cluster1
+aws ecr-public get-login-password --region us-east-1 | helm registry login --username AWS --password-stdin public.ecr.aws
+helm install gateway-api-controller \
+oci://public.ecr.aws/aws-application-networking-k8s/aws-gateway-controller-chart \
+--version=v0.0.16 \
+--set=serviceAccount.create=false --namespace aws-application-networking-system \
+--kube-context zijunw-Isengard@cluster-1.us-west-2.eksctl.io

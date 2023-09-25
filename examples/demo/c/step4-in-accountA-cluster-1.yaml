@@ -1,0 +1,75 @@
+# ada credentials update --once --provider isengard --role Admin  --account 018212172037
+# k1_account_a apply -f examples/demo/0-client-pod-in-cluster-1.yaml
+# k1_account_a apply -f examples/demo/c/step4-in-accountA-cluster-1.yaml
+
+# k1_account_a exec client -- curl $LATTICE_SERVICE_DNS/service-2-from-account-b-cluster-2  2>/dev/null
+
+
+# k1_account_a delete -f examples/demo/c/step4-in-accountA-cluster-1.yaml
+# in accountB, delete the RAM sharing
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: Gateway
+metadata:
+  name: my-gateway-1
+  annotations:
+    application-networking.k8s.aws/lattice-vpc-association: "true"
+spec:
+  gatewayClassName: amazon-vpc-lattice
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+
+---
+
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: my-httproute
+spec:
+  parentRefs:
+    - name: my-gateway-1
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: dummy-service
+          kind: Service
+      matches:
+        - path:
+            type: PathPrefix
+            value: /dummy-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dummy-service
+  labels:
+    app: dummy-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dummy-service
+  template:
+    metadata:
+      labels:
+        app: dummy-service
+    spec:
+      containers:
+        - name: dummy-service
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "dummy-service pod from cluster 2"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dummy-service
+spec:
+  selector:
+    app: dummy-service
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090

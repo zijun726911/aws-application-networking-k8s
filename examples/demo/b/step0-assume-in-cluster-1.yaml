@@ -1,0 +1,91 @@
+# k1 apply -f examples/demo/b/step0-assume-in-cluster-1.yaml
+# export LATTICE_SERVICE_DNS=$(k1 get httproute my-httproute -o json | jq -r '.metadata.annotations["application-networking.k8s.aws/lattice-assigned-domain-name"]') && echo $LATTICE_SERVICE_DNS
+# k1 exec client -- curl $LATTICE_SERVICE_DNS 2>/dev/null
+
+# k1 delete -f examples/demo/b/step0-assume-in-cluster-1.yaml
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: Gateway
+metadata:
+  name: my-gateway
+  annotations:
+    application-networking.k8s.aws/lattice-vpc-association: "true"
+spec:
+  gatewayClassName: amazon-vpc-lattice
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+
+---
+
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: my-httproute
+spec:
+  parentRefs:
+    - name: my-gateway
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: service1-v1
+          kind: ServiceImport
+
+
+---
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceImport
+metadata:
+  name: service1-v1
+spec:
+  type: ClusterSetIP
+  ports:
+    - port: 80
+      protocol: TCP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service1-v1
+  labels:
+    app: service1-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service1-v1
+  template:
+    metadata:
+      labels:
+        app: service1-v1
+    spec:
+      containers:
+        - name: service1-v1
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "service1-v1 pod from cluster 1"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service1-v1
+spec:
+  selector:
+    app: service1-v1
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+
+---
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: service1-v1
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+
+
