@@ -1,0 +1,3600 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-1
+  labels:
+    app: inventory-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-1
+  template:
+    metadata:
+      labels:
+        app: inventory-1
+    spec:
+      containers:
+        - name: inventory-1
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-1
+spec:
+  selector:
+    app: inventory-1
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-2
+  labels:
+    app: inventory-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-2
+  template:
+    metadata:
+      labels:
+        app: inventory-2
+    spec:
+      containers:
+        - name: inventory-2
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-2
+spec:
+  selector:
+    app: inventory-2
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-3
+  labels:
+    app: inventory-3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-3
+  template:
+    metadata:
+      labels:
+        app: inventory-3
+    spec:
+      containers:
+        - name: inventory-3
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-3
+spec:
+  selector:
+    app: inventory-3
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-4
+  labels:
+    app: inventory-4
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-4
+  template:
+    metadata:
+      labels:
+        app: inventory-4
+    spec:
+      containers:
+        - name: inventory-4
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-4
+spec:
+  selector:
+    app: inventory-4
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-5
+  labels:
+    app: inventory-5
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-5
+  template:
+    metadata:
+      labels:
+        app: inventory-5
+    spec:
+      containers:
+        - name: inventory-5
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-5
+spec:
+  selector:
+    app: inventory-5
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-6
+  labels:
+    app: inventory-6
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-6
+  template:
+    metadata:
+      labels:
+        app: inventory-6
+    spec:
+      containers:
+        - name: inventory-6
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-6
+spec:
+  selector:
+    app: inventory-6
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-7
+  labels:
+    app: inventory-7
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-7
+  template:
+    metadata:
+      labels:
+        app: inventory-7
+    spec:
+      containers:
+        - name: inventory-7
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-7
+spec:
+  selector:
+    app: inventory-7
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-8
+  labels:
+    app: inventory-8
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-8
+  template:
+    metadata:
+      labels:
+        app: inventory-8
+    spec:
+      containers:
+        - name: inventory-8
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-8
+spec:
+  selector:
+    app: inventory-8
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-9
+  labels:
+    app: inventory-9
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-9
+  template:
+    metadata:
+      labels:
+        app: inventory-9
+    spec:
+      containers:
+        - name: inventory-9
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-9
+spec:
+  selector:
+    app: inventory-9
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-10
+  labels:
+    app: inventory-10
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-10
+  template:
+    metadata:
+      labels:
+        app: inventory-10
+    spec:
+      containers:
+        - name: inventory-10
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-10
+spec:
+  selector:
+    app: inventory-10
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-11
+  labels:
+    app: inventory-11
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-11
+  template:
+    metadata:
+      labels:
+        app: inventory-11
+    spec:
+      containers:
+        - name: inventory-11
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-11
+spec:
+  selector:
+    app: inventory-11
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-12
+  labels:
+    app: inventory-12
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-12
+  template:
+    metadata:
+      labels:
+        app: inventory-12
+    spec:
+      containers:
+        - name: inventory-12
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-12
+spec:
+  selector:
+    app: inventory-12
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-13
+  labels:
+    app: inventory-13
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-13
+  template:
+    metadata:
+      labels:
+        app: inventory-13
+    spec:
+      containers:
+        - name: inventory-13
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-13
+spec:
+  selector:
+    app: inventory-13
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-14
+  labels:
+    app: inventory-14
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-14
+  template:
+    metadata:
+      labels:
+        app: inventory-14
+    spec:
+      containers:
+        - name: inventory-14
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-14
+spec:
+  selector:
+    app: inventory-14
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-15
+  labels:
+    app: inventory-15
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-15
+  template:
+    metadata:
+      labels:
+        app: inventory-15
+    spec:
+      containers:
+        - name: inventory-15
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-15
+spec:
+  selector:
+    app: inventory-15
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-16
+  labels:
+    app: inventory-16
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-16
+  template:
+    metadata:
+      labels:
+        app: inventory-16
+    spec:
+      containers:
+        - name: inventory-16
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-16
+spec:
+  selector:
+    app: inventory-16
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-17
+  labels:
+    app: inventory-17
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-17
+  template:
+    metadata:
+      labels:
+        app: inventory-17
+    spec:
+      containers:
+        - name: inventory-17
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-17
+spec:
+  selector:
+    app: inventory-17
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-18
+  labels:
+    app: inventory-18
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-18
+  template:
+    metadata:
+      labels:
+        app: inventory-18
+    spec:
+      containers:
+        - name: inventory-18
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-18
+spec:
+  selector:
+    app: inventory-18
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-19
+  labels:
+    app: inventory-19
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-19
+  template:
+    metadata:
+      labels:
+        app: inventory-19
+    spec:
+      containers:
+        - name: inventory-19
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-19
+spec:
+  selector:
+    app: inventory-19
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-20
+  labels:
+    app: inventory-20
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-20
+  template:
+    metadata:
+      labels:
+        app: inventory-20
+    spec:
+      containers:
+        - name: inventory-20
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-20
+spec:
+  selector:
+    app: inventory-20
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-21
+  labels:
+    app: inventory-21
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-21
+  template:
+    metadata:
+      labels:
+        app: inventory-21
+    spec:
+      containers:
+        - name: inventory-21
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-21
+spec:
+  selector:
+    app: inventory-21
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-22
+  labels:
+    app: inventory-22
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-22
+  template:
+    metadata:
+      labels:
+        app: inventory-22
+    spec:
+      containers:
+        - name: inventory-22
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-22
+spec:
+  selector:
+    app: inventory-22
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-23
+  labels:
+    app: inventory-23
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-23
+  template:
+    metadata:
+      labels:
+        app: inventory-23
+    spec:
+      containers:
+        - name: inventory-23
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-23
+spec:
+  selector:
+    app: inventory-23
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-24
+  labels:
+    app: inventory-24
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-24
+  template:
+    metadata:
+      labels:
+        app: inventory-24
+    spec:
+      containers:
+        - name: inventory-24
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-24
+spec:
+  selector:
+    app: inventory-24
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-25
+  labels:
+    app: inventory-25
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-25
+  template:
+    metadata:
+      labels:
+        app: inventory-25
+    spec:
+      containers:
+        - name: inventory-25
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-25
+spec:
+  selector:
+    app: inventory-25
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-26
+  labels:
+    app: inventory-26
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-26
+  template:
+    metadata:
+      labels:
+        app: inventory-26
+    spec:
+      containers:
+        - name: inventory-26
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-26
+spec:
+  selector:
+    app: inventory-26
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-27
+  labels:
+    app: inventory-27
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-27
+  template:
+    metadata:
+      labels:
+        app: inventory-27
+    spec:
+      containers:
+        - name: inventory-27
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-27
+spec:
+  selector:
+    app: inventory-27
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-28
+  labels:
+    app: inventory-28
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-28
+  template:
+    metadata:
+      labels:
+        app: inventory-28
+    spec:
+      containers:
+        - name: inventory-28
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-28
+spec:
+  selector:
+    app: inventory-28
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-29
+  labels:
+    app: inventory-29
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-29
+  template:
+    metadata:
+      labels:
+        app: inventory-29
+    spec:
+      containers:
+        - name: inventory-29
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-29
+spec:
+  selector:
+    app: inventory-29
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-30
+  labels:
+    app: inventory-30
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-30
+  template:
+    metadata:
+      labels:
+        app: inventory-30
+    spec:
+      containers:
+        - name: inventory-30
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-30
+spec:
+  selector:
+    app: inventory-30
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-31
+  labels:
+    app: inventory-31
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-31
+  template:
+    metadata:
+      labels:
+        app: inventory-31
+    spec:
+      containers:
+        - name: inventory-31
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-31
+spec:
+  selector:
+    app: inventory-31
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-32
+  labels:
+    app: inventory-32
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-32
+  template:
+    metadata:
+      labels:
+        app: inventory-32
+    spec:
+      containers:
+        - name: inventory-32
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-32
+spec:
+  selector:
+    app: inventory-32
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-33
+  labels:
+    app: inventory-33
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-33
+  template:
+    metadata:
+      labels:
+        app: inventory-33
+    spec:
+      containers:
+        - name: inventory-33
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-33
+spec:
+  selector:
+    app: inventory-33
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-34
+  labels:
+    app: inventory-34
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-34
+  template:
+    metadata:
+      labels:
+        app: inventory-34
+    spec:
+      containers:
+        - name: inventory-34
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-34
+spec:
+  selector:
+    app: inventory-34
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-35
+  labels:
+    app: inventory-35
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-35
+  template:
+    metadata:
+      labels:
+        app: inventory-35
+    spec:
+      containers:
+        - name: inventory-35
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-35
+spec:
+  selector:
+    app: inventory-35
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-36
+  labels:
+    app: inventory-36
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-36
+  template:
+    metadata:
+      labels:
+        app: inventory-36
+    spec:
+      containers:
+        - name: inventory-36
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-36
+spec:
+  selector:
+    app: inventory-36
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-37
+  labels:
+    app: inventory-37
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-37
+  template:
+    metadata:
+      labels:
+        app: inventory-37
+    spec:
+      containers:
+        - name: inventory-37
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-37
+spec:
+  selector:
+    app: inventory-37
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-38
+  labels:
+    app: inventory-38
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-38
+  template:
+    metadata:
+      labels:
+        app: inventory-38
+    spec:
+      containers:
+        - name: inventory-38
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-38
+spec:
+  selector:
+    app: inventory-38
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-39
+  labels:
+    app: inventory-39
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-39
+  template:
+    metadata:
+      labels:
+        app: inventory-39
+    spec:
+      containers:
+        - name: inventory-39
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-39
+spec:
+  selector:
+    app: inventory-39
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-40
+  labels:
+    app: inventory-40
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-40
+  template:
+    metadata:
+      labels:
+        app: inventory-40
+    spec:
+      containers:
+        - name: inventory-40
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-40
+spec:
+  selector:
+    app: inventory-40
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-41
+  labels:
+    app: inventory-41
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-41
+  template:
+    metadata:
+      labels:
+        app: inventory-41
+    spec:
+      containers:
+        - name: inventory-41
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-41
+spec:
+  selector:
+    app: inventory-41
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-42
+  labels:
+    app: inventory-42
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-42
+  template:
+    metadata:
+      labels:
+        app: inventory-42
+    spec:
+      containers:
+        - name: inventory-42
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-42
+spec:
+  selector:
+    app: inventory-42
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-43
+  labels:
+    app: inventory-43
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-43
+  template:
+    metadata:
+      labels:
+        app: inventory-43
+    spec:
+      containers:
+        - name: inventory-43
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-43
+spec:
+  selector:
+    app: inventory-43
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-44
+  labels:
+    app: inventory-44
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-44
+  template:
+    metadata:
+      labels:
+        app: inventory-44
+    spec:
+      containers:
+        - name: inventory-44
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-44
+spec:
+  selector:
+    app: inventory-44
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-45
+  labels:
+    app: inventory-45
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-45
+  template:
+    metadata:
+      labels:
+        app: inventory-45
+    spec:
+      containers:
+        - name: inventory-45
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-45
+spec:
+  selector:
+    app: inventory-45
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-46
+  labels:
+    app: inventory-46
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-46
+  template:
+    metadata:
+      labels:
+        app: inventory-46
+    spec:
+      containers:
+        - name: inventory-46
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-46
+spec:
+  selector:
+    app: inventory-46
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-47
+  labels:
+    app: inventory-47
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-47
+  template:
+    metadata:
+      labels:
+        app: inventory-47
+    spec:
+      containers:
+        - name: inventory-47
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-47
+spec:
+  selector:
+    app: inventory-47
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-48
+  labels:
+    app: inventory-48
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-48
+  template:
+    metadata:
+      labels:
+        app: inventory-48
+    spec:
+      containers:
+        - name: inventory-48
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-48
+spec:
+  selector:
+    app: inventory-48
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-49
+  labels:
+    app: inventory-49
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-49
+  template:
+    metadata:
+      labels:
+        app: inventory-49
+    spec:
+      containers:
+        - name: inventory-49
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-49
+spec:
+  selector:
+    app: inventory-49
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-50
+  labels:
+    app: inventory-50
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-50
+  template:
+    metadata:
+      labels:
+        app: inventory-50
+    spec:
+      containers:
+        - name: inventory-50
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-50
+spec:
+  selector:
+    app: inventory-50
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-51
+  labels:
+    app: inventory-51
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-51
+  template:
+    metadata:
+      labels:
+        app: inventory-51
+    spec:
+      containers:
+        - name: inventory-51
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-51
+spec:
+  selector:
+    app: inventory-51
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-52
+  labels:
+    app: inventory-52
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-52
+  template:
+    metadata:
+      labels:
+        app: inventory-52
+    spec:
+      containers:
+        - name: inventory-52
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-52
+spec:
+  selector:
+    app: inventory-52
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-53
+  labels:
+    app: inventory-53
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-53
+  template:
+    metadata:
+      labels:
+        app: inventory-53
+    spec:
+      containers:
+        - name: inventory-53
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-53
+spec:
+  selector:
+    app: inventory-53
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-54
+  labels:
+    app: inventory-54
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-54
+  template:
+    metadata:
+      labels:
+        app: inventory-54
+    spec:
+      containers:
+        - name: inventory-54
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-54
+spec:
+  selector:
+    app: inventory-54
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-55
+  labels:
+    app: inventory-55
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-55
+  template:
+    metadata:
+      labels:
+        app: inventory-55
+    spec:
+      containers:
+        - name: inventory-55
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-55
+spec:
+  selector:
+    app: inventory-55
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-56
+  labels:
+    app: inventory-56
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-56
+  template:
+    metadata:
+      labels:
+        app: inventory-56
+    spec:
+      containers:
+        - name: inventory-56
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-56
+spec:
+  selector:
+    app: inventory-56
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-57
+  labels:
+    app: inventory-57
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-57
+  template:
+    metadata:
+      labels:
+        app: inventory-57
+    spec:
+      containers:
+        - name: inventory-57
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-57
+spec:
+  selector:
+    app: inventory-57
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-58
+  labels:
+    app: inventory-58
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-58
+  template:
+    metadata:
+      labels:
+        app: inventory-58
+    spec:
+      containers:
+        - name: inventory-58
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-58
+spec:
+  selector:
+    app: inventory-58
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-59
+  labels:
+    app: inventory-59
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-59
+  template:
+    metadata:
+      labels:
+        app: inventory-59
+    spec:
+      containers:
+        - name: inventory-59
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-59
+spec:
+  selector:
+    app: inventory-59
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-60
+  labels:
+    app: inventory-60
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-60
+  template:
+    metadata:
+      labels:
+        app: inventory-60
+    spec:
+      containers:
+        - name: inventory-60
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-60
+spec:
+  selector:
+    app: inventory-60
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-61
+  labels:
+    app: inventory-61
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-61
+  template:
+    metadata:
+      labels:
+        app: inventory-61
+    spec:
+      containers:
+        - name: inventory-61
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-61
+spec:
+  selector:
+    app: inventory-61
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-62
+  labels:
+    app: inventory-62
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-62
+  template:
+    metadata:
+      labels:
+        app: inventory-62
+    spec:
+      containers:
+        - name: inventory-62
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-62
+spec:
+  selector:
+    app: inventory-62
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-63
+  labels:
+    app: inventory-63
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-63
+  template:
+    metadata:
+      labels:
+        app: inventory-63
+    spec:
+      containers:
+        - name: inventory-63
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-63
+spec:
+  selector:
+    app: inventory-63
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-64
+  labels:
+    app: inventory-64
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-64
+  template:
+    metadata:
+      labels:
+        app: inventory-64
+    spec:
+      containers:
+        - name: inventory-64
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-64
+spec:
+  selector:
+    app: inventory-64
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-65
+  labels:
+    app: inventory-65
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-65
+  template:
+    metadata:
+      labels:
+        app: inventory-65
+    spec:
+      containers:
+        - name: inventory-65
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-65
+spec:
+  selector:
+    app: inventory-65
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-66
+  labels:
+    app: inventory-66
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-66
+  template:
+    metadata:
+      labels:
+        app: inventory-66
+    spec:
+      containers:
+        - name: inventory-66
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-66
+spec:
+  selector:
+    app: inventory-66
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-67
+  labels:
+    app: inventory-67
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-67
+  template:
+    metadata:
+      labels:
+        app: inventory-67
+    spec:
+      containers:
+        - name: inventory-67
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-67
+spec:
+  selector:
+    app: inventory-67
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-68
+  labels:
+    app: inventory-68
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-68
+  template:
+    metadata:
+      labels:
+        app: inventory-68
+    spec:
+      containers:
+        - name: inventory-68
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-68
+spec:
+  selector:
+    app: inventory-68
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-69
+  labels:
+    app: inventory-69
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-69
+  template:
+    metadata:
+      labels:
+        app: inventory-69
+    spec:
+      containers:
+        - name: inventory-69
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-69
+spec:
+  selector:
+    app: inventory-69
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-70
+  labels:
+    app: inventory-70
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-70
+  template:
+    metadata:
+      labels:
+        app: inventory-70
+    spec:
+      containers:
+        - name: inventory-70
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-70
+spec:
+  selector:
+    app: inventory-70
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-71
+  labels:
+    app: inventory-71
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-71
+  template:
+    metadata:
+      labels:
+        app: inventory-71
+    spec:
+      containers:
+        - name: inventory-71
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-71
+spec:
+  selector:
+    app: inventory-71
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-72
+  labels:
+    app: inventory-72
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-72
+  template:
+    metadata:
+      labels:
+        app: inventory-72
+    spec:
+      containers:
+        - name: inventory-72
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-72
+spec:
+  selector:
+    app: inventory-72
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-73
+  labels:
+    app: inventory-73
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-73
+  template:
+    metadata:
+      labels:
+        app: inventory-73
+    spec:
+      containers:
+        - name: inventory-73
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-73
+spec:
+  selector:
+    app: inventory-73
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-74
+  labels:
+    app: inventory-74
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-74
+  template:
+    metadata:
+      labels:
+        app: inventory-74
+    spec:
+      containers:
+        - name: inventory-74
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-74
+spec:
+  selector:
+    app: inventory-74
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-75
+  labels:
+    app: inventory-75
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-75
+  template:
+    metadata:
+      labels:
+        app: inventory-75
+    spec:
+      containers:
+        - name: inventory-75
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-75
+spec:
+  selector:
+    app: inventory-75
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-76
+  labels:
+    app: inventory-76
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-76
+  template:
+    metadata:
+      labels:
+        app: inventory-76
+    spec:
+      containers:
+        - name: inventory-76
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-76
+spec:
+  selector:
+    app: inventory-76
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-77
+  labels:
+    app: inventory-77
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-77
+  template:
+    metadata:
+      labels:
+        app: inventory-77
+    spec:
+      containers:
+        - name: inventory-77
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-77
+spec:
+  selector:
+    app: inventory-77
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-78
+  labels:
+    app: inventory-78
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-78
+  template:
+    metadata:
+      labels:
+        app: inventory-78
+    spec:
+      containers:
+        - name: inventory-78
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-78
+spec:
+  selector:
+    app: inventory-78
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-79
+  labels:
+    app: inventory-79
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-79
+  template:
+    metadata:
+      labels:
+        app: inventory-79
+    spec:
+      containers:
+        - name: inventory-79
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-79
+spec:
+  selector:
+    app: inventory-79
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-80
+  labels:
+    app: inventory-80
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-80
+  template:
+    metadata:
+      labels:
+        app: inventory-80
+    spec:
+      containers:
+        - name: inventory-80
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-80
+spec:
+  selector:
+    app: inventory-80
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-81
+  labels:
+    app: inventory-81
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-81
+  template:
+    metadata:
+      labels:
+        app: inventory-81
+    spec:
+      containers:
+        - name: inventory-81
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-81
+spec:
+  selector:
+    app: inventory-81
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-82
+  labels:
+    app: inventory-82
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-82
+  template:
+    metadata:
+      labels:
+        app: inventory-82
+    spec:
+      containers:
+        - name: inventory-82
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-82
+spec:
+  selector:
+    app: inventory-82
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-83
+  labels:
+    app: inventory-83
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-83
+  template:
+    metadata:
+      labels:
+        app: inventory-83
+    spec:
+      containers:
+        - name: inventory-83
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-83
+spec:
+  selector:
+    app: inventory-83
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-84
+  labels:
+    app: inventory-84
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-84
+  template:
+    metadata:
+      labels:
+        app: inventory-84
+    spec:
+      containers:
+        - name: inventory-84
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-84
+spec:
+  selector:
+    app: inventory-84
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-85
+  labels:
+    app: inventory-85
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-85
+  template:
+    metadata:
+      labels:
+        app: inventory-85
+    spec:
+      containers:
+        - name: inventory-85
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-85
+spec:
+  selector:
+    app: inventory-85
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-86
+  labels:
+    app: inventory-86
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-86
+  template:
+    metadata:
+      labels:
+        app: inventory-86
+    spec:
+      containers:
+        - name: inventory-86
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-86
+spec:
+  selector:
+    app: inventory-86
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-87
+  labels:
+    app: inventory-87
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-87
+  template:
+    metadata:
+      labels:
+        app: inventory-87
+    spec:
+      containers:
+        - name: inventory-87
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-87
+spec:
+  selector:
+    app: inventory-87
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-88
+  labels:
+    app: inventory-88
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-88
+  template:
+    metadata:
+      labels:
+        app: inventory-88
+    spec:
+      containers:
+        - name: inventory-88
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-88
+spec:
+  selector:
+    app: inventory-88
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-89
+  labels:
+    app: inventory-89
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-89
+  template:
+    metadata:
+      labels:
+        app: inventory-89
+    spec:
+      containers:
+        - name: inventory-89
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-89
+spec:
+  selector:
+    app: inventory-89
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-90
+  labels:
+    app: inventory-90
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-90
+  template:
+    metadata:
+      labels:
+        app: inventory-90
+    spec:
+      containers:
+        - name: inventory-90
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-90
+spec:
+  selector:
+    app: inventory-90
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-91
+  labels:
+    app: inventory-91
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-91
+  template:
+    metadata:
+      labels:
+        app: inventory-91
+    spec:
+      containers:
+        - name: inventory-91
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-91
+spec:
+  selector:
+    app: inventory-91
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-92
+  labels:
+    app: inventory-92
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-92
+  template:
+    metadata:
+      labels:
+        app: inventory-92
+    spec:
+      containers:
+        - name: inventory-92
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-92
+spec:
+  selector:
+    app: inventory-92
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-93
+  labels:
+    app: inventory-93
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-93
+  template:
+    metadata:
+      labels:
+        app: inventory-93
+    spec:
+      containers:
+        - name: inventory-93
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-93
+spec:
+  selector:
+    app: inventory-93
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-94
+  labels:
+    app: inventory-94
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-94
+  template:
+    metadata:
+      labels:
+        app: inventory-94
+    spec:
+      containers:
+        - name: inventory-94
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-94
+spec:
+  selector:
+    app: inventory-94
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-95
+  labels:
+    app: inventory-95
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-95
+  template:
+    metadata:
+      labels:
+        app: inventory-95
+    spec:
+      containers:
+        - name: inventory-95
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-95
+spec:
+  selector:
+    app: inventory-95
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-96
+  labels:
+    app: inventory-96
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-96
+  template:
+    metadata:
+      labels:
+        app: inventory-96
+    spec:
+      containers:
+        - name: inventory-96
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-96
+spec:
+  selector:
+    app: inventory-96
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-97
+  labels:
+    app: inventory-97
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-97
+  template:
+    metadata:
+      labels:
+        app: inventory-97
+    spec:
+      containers:
+        - name: inventory-97
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-97
+spec:
+  selector:
+    app: inventory-97
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-98
+  labels:
+    app: inventory-98
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-98
+  template:
+    metadata:
+      labels:
+        app: inventory-98
+    spec:
+      containers:
+        - name: inventory-98
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-98
+spec:
+  selector:
+    app: inventory-98
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-99
+  labels:
+    app: inventory-99
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-99
+  template:
+    metadata:
+      labels:
+        app: inventory-99
+    spec:
+      containers:
+        - name: inventory-99
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-99
+spec:
+  selector:
+    app: inventory-99
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-100
+  labels:
+    app: inventory-100
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-100
+  template:
+    metadata:
+      labels:
+        app: inventory-100
+    spec:
+      containers:
+        - name: inventory-100
+          image: public.ecr.aws/x2j8p8w7/http-server:latest
+          env:
+            - name: PodName
+              value: "Inventory-ver2 handler pod"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-100
+spec:
+  selector:
+    app: inventory-100
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
+---
+

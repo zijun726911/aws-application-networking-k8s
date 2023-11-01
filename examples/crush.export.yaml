@@ -1,0 +1,800 @@
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-1
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-2
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-3
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-4
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-5
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-6
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-7
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-8
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-9
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-10
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-11
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-12
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-13
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-14
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-15
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-16
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-17
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-18
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-19
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-20
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-21
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-22
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-23
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-24
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-25
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-26
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-27
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-28
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-29
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-30
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-31
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-32
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-33
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-34
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-35
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-36
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-37
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-38
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-39
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-40
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-41
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-42
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-43
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-44
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-45
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-46
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-47
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-48
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-49
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-50
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-51
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-52
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-53
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-54
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-55
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-56
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-57
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-58
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-59
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-60
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-61
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-62
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-63
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-64
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-65
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-66
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-67
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-68
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-69
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-70
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-71
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-72
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-73
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-74
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-75
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-76
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-77
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-78
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-79
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-80
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-81
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-82
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-83
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-84
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-85
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-86
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-87
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-88
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-89
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-90
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-91
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-92
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-93
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-94
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-95
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-96
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-97
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-98
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-99
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: inventory-100
+  annotations:
+    multicluster.x-k8s.io/federation: "amazon-vpc-lattice"
+---
+

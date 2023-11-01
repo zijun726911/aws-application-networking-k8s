@@ -1,0 +1,131 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grpcbin-certs
+data:
+  server.key: |
+    -----BEGIN PRIVATE KEY-----
+    MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC6CwqqA2nfXWU9
+    TYyVCKiuRbFYn2xwAGZrn7rPn1nDMsgJCfkn/F9hYibgliG3DqocnJtO7rYLj0Ai
+    b4Ggoku7q5tbn0rAOVaPxyJiGky5bRfYBqYcKCCavuTAufRT9DNEYrjIu0ezddWn
+    HQ5HvefzHjwMJw4E6GGFizRMvO0pVIpS5b4GAZJhvTrUoe1fHFhm6lLPrIFrZALM
+    NF9lLyKM+9eB9L4IQu0iA53bU1jxkbiE+QAG4FJtVeLJFo+tFkhCymZ0rJhiW8qo
+    zQwfBjIR7lpThdtZdUxeFcWvkZrYwCWWjY9dkgddE2VXJ/aQjv0HbWghAwFBFQbX
+    vv6YMOafAgMBAAECggEASdMT2j8chgwznk3lmUYkWXNCWp54k0E1Y0OxB65+Gh1O
+    j3errRhSaPxf3QL2QgPJsSzb3EiRaKjhlEiXMbz1PHVuYr8lFH4sQUWN+UviYjpO
+    GeUZiVbLCVzyvR+NOrtOlLZwCQd3/lil/XhkMEfFgQ3gWhotT/k+qZWBnWni2mEK
+    QKzvwQcLT8s/k90z+cWUE3m4n6vGS00/F9YzGl5z2yfazwOw/gUQm7at1y34z6h5
+    J2I2D/WG7KG+kdNYrJ7ayOEcFhe8FS/G49R+JgkdlS3hCiWBO6o0sAmP3nd2UI1Z
+    ZxwTafY7g4ng+O4qwUTvUhoJYfseOr6xmTQGLuYNkQKBgQDm5vQDjbujUlNigCw8
+    SpOXO1o4cE9CSxkFJ6Ua4ZTqS67+Gmzy+uAjaze+bbiRovMO78YQkt5ZxiPotXTi
+    KlO37jFx89Bc7+pfvaA66uh5hnaOH/Qa+cnixSB7x7PN3WljDLlmNVkTAkc6eRyr
+    h9ox8Zqf3m3s7qMapiXxZwbFiwKBgQDOQ9knYgSlV0m4hfJ0ZJbLHy5pTob8KE90
+    vj1MWB3Uilg6p0ZFsLIBXRse0vqPQnq+dAgFgHRULhHLlBNKe02QtQd5AoaRq54g
+    uCaEb4+KI0kdpkPQTy0/9JostV+2a2Kh0BRvqJwgfzTIf9OyrQsFGEppArDMNQW8
+    KBemX5sNvQKBgFhRICY30PxQIdq8Ia9R6w/eQMzzkC1QIhrJpioY/Gd9WUqR+vgZ
+    IyAJA4JP31e9FvCwn3Z5Zpi548Q/m5xiCjGA5uKqGhliHqhOFHpUnWTWHISSDkE/
+    J4wYUCtoIAru1D9xf3xrjU1rAqmH54JobPnLapQZdLw6LqKjyEGEYZ+vAoGAZ9Ux
+    2Kh4DD+fpdsQDVWhr0jYFTzpqMAmF2+47dih0599ALG6J1Tmltcm0uKELV/a6EsC
+    yro6VTIH1UKKX4Eor8LhqyIBWg1ZgcER6rM6P+C5asqK8q8Y6UwZ3I3FS9BNC4Xy
+    866eQaGnkZL/n7+Kf5sVwj0PgQzkAS7xkNgp9sUCgYEAmqEssD5oWcK/XwrQ253m
+    NUp56fy8jNNQWEy9M1ztihBJ+XRf7Wu/VjxCb+4ojyagq9B85xpL7AeBMDiinP9Q
+    U9C1+RB1ERZHHBsfAiir5B3W1kR9in6CAiJvohO+T7MAyJcZg3M2MXXUlYvZKeHo
+    c5a/Rr6SzRHvXV0kn0tV6KA=
+    -----END PRIVATE KEY-----
+  server.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIICrDCCAZQCCQD3RqzLyiTpGjANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA0q
+    Lm15LXRlc3QuY29tMB4XDTIzMDgzMDE3MDcwNloXDTMzMDgyNzE3MDcwNlowGDEW
+    MBQGA1UEAwwNKi5teS10ZXN0LmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCC
+    AQoCggEBALoLCqoDad9dZT1NjJUIqK5FsVifbHAAZmufus+fWcMyyAkJ+Sf8X2Fi
+    JuCWIbcOqhycm07utguPQCJvgaCiS7urm1ufSsA5Vo/HImIaTLltF9gGphwoIJq+
+    5MC59FP0M0RiuMi7R7N11acdDke95/MePAwnDgToYYWLNEy87SlUilLlvgYBkmG9
+    OtSh7V8cWGbqUs+sgWtkAsw0X2UvIoz714H0vghC7SIDndtTWPGRuIT5AAbgUm1V
+    4skWj60WSELKZnSsmGJbyqjNDB8GMhHuWlOF21l1TF4Vxa+RmtjAJZaNj12SB10T
+    ZVcn9pCO/QdtaCEDAUEVBte+/pgw5p8CAwEAATANBgkqhkiG9w0BAQsFAAOCAQEA
+    Mj3forrYgT5y4PLSzUMTp4Ur+RaItf00Apwk7p7a1zEj5tYGV6yslm63cL1TL2U/
+    rRX1vqJy+YsLTlDT4J5tFCtVgZIVrz4WM9jWnJD+kxrArj/rVA6+XN/nqTzg+dcM
+    Pm9NDP3wyha/9RrWGdspLUMXiQnu8gW/1H8QTfg6i/VwpIuxZJzJPrcloVolnvEk
+    nppVPOnVsl2H9ygz7wg6P2Ewxf31j9BLKw5UznUUEPneuAaT/1ypNBErn9tr73Mp
+    PMBcB4Ayrit8YOtDxqNDxjiJT9CZ5xk4KLuBnbUiKvbVZq9Ot+7dIkPjol3zew01
+    5IMwE9LCdH9wfBQz8qkOjg==
+    -----END CERTIFICATE-----
+---
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: GRPCRoute
+metadata:
+  name: greeter-grpc-route
+spec:
+  hostnames:
+    - tls-parking.my-test.com
+  parentRefs:
+    - name: my-hotel
+      sectionName: tls-with-customer-cert
+  rules:
+    - backendRefs:
+        - name: grpcbin-server
+          kind: Service
+          port: 19001
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpcbin-server
+  labels:
+    app: grpcbin-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grpcbin-server
+  template:
+    metadata:
+      labels:
+        app: grpcbin-server
+    spec:
+      containers:
+        - name: grpcbin-server
+          image: moul/grpcbin:latest
+          volumeMounts:
+            - name: cert-volume
+              mountPath: /root/cert
+      volumes:
+        - name: cert-volume
+          configMap:
+            name: grpcbin-certs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grpcbin-server
+spec:
+  selector:
+    app: grpcbin-server
+  ports:
+    - name: over-http
+      port: 19000
+      targetPort: 9000
+    - name: over-https
+      port: 19001
+      targetPort: 9001
+---
+apiVersion: application-networking.k8s.aws/v1alpha1
+kind: TargetGroupPolicy
+metadata:
+  name: test-policy
+spec:
+  targetRef:
+    group: ""
+    kind: Service
+    name: grpcbin-server
+  protocol: HTTPS
+  healthCheck:
+    intervalSeconds: 10
+    timeoutSeconds: 1
+    healthyThresholdCount: 3
+    unhealthyThresholdCount: 2
+    enabled: true
+    protocolVersion: HTTP1
+    protocol: HTTPS
+    port: 9001
+    statusMatch: "500"

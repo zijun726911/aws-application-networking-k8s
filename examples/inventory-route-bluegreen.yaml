@@ -8,10 +8,7 @@ spec:
     sectionName: http
   rules:
   - backendRefs:
-    - name: inventory-ver1
+    - name: inventory-ver2
       kind: Service
       port: 80
       weight: 10
-    - name: inventory-ver2
-      kind: ServiceImport
-      weight: 90

@@ -19,4 +19,4 @@ spec:
     tls:
       mode: Terminate
       options:
-        application-networking.k8s.aws/certificate-arn: arn:aws:acm:us-west-2:<account>:certificate/4555204d-07e1-43f0-a533-d02750f41545
+        application-networking.k8s.aws/certificate-arn: arn:aws:acm:us-west-2:219875826667:certificate/9fc0a4dc-7c6b-47a3-9117-e18ac2781cea
