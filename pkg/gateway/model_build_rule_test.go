@@ -3,10 +3,8 @@ package gateway
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-application-networking-k8s/pkg/k8s"
-	"github.com/aws/aws-application-networking-k8s/pkg/model/core"
-	model "github.com/aws/aws-application-networking-k8s/pkg/model/lattice"
-	"github.com/aws/aws-application-networking-k8s/pkg/utils/gwlog"
+	"testing"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/vpclattice"
 	"github.com/golang/mock/gomock"
@@ -16,12 +14,15 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	clientgoscheme "k8s.io/client-go/kubernetes/scheme"
 	"k8s.io/utils/pointer"
-	"reflect"
 	testclient "sigs.k8s.io/controller-runtime/pkg/client/fake"
 	gwv1alpha2 "sigs.k8s.io/gateway-api/apis/v1alpha2"
 	gwv1beta1 "sigs.k8s.io/gateway-api/apis/v1beta1"
 	mcsv1alpha1 "sigs.k8s.io/mcs-api/pkg/apis/v1alpha1"
-	"testing"
+
+	"github.com/aws/aws-application-networking-k8s/pkg/k8s"
+	"github.com/aws/aws-application-networking-k8s/pkg/model/core"
+	model "github.com/aws/aws-application-networking-k8s/pkg/model/lattice"
+	"github.com/aws/aws-application-networking-k8s/pkg/utils/gwlog"
 )
 
 type dummyTgBuilder struct {
@@ -57,6 +58,7 @@ func Test_RuleModelBuild(t *testing.T) {
 	var k8sPathMatchPrefix = gwv1beta1.PathMatchPathPrefix
 	var k8sMethodMatchExactType = gwv1alpha2.GRPCMethodMatchExact
 	var k8sHeaderExactType = gwv1beta1.HeaderMatchExact
+	var k8sHeaderRegexType = gwv1beta1.HeaderMatchRegularExpression
 	var hdr1 = "env1"
 	var hdr1Value = "test1"
 	var hdr2 = "env2"
@@ -729,6 +731,7 @@ func Test_RuleModelBuild(t *testing.T) {
 							Match: &vpclattice.HeaderMatchType{
 								Exact: &hdr1Value,
 							},
+							CaseSensitive: aws.Bool(false),
 						},
 					},
 					Action: model.RuleAction{
@@ -795,12 +798,14 @@ func Test_RuleModelBuild(t *testing.T) {
 							Match: &vpclattice.HeaderMatchType{
 								Exact: &hdr1Value,
 							},
+							CaseSensitive: aws.Bool(false),
 						},
 						{
 							Name: &hdr2,
 							Match: &vpclattice.HeaderMatchType{
 								Exact: &hdr2Value,
 							},
+							CaseSensitive: aws.Bool(false),
 						},
 					},
 					Action: model.RuleAction{
@@ -874,12 +879,14 @@ func Test_RuleModelBuild(t *testing.T) {
 							Match: &vpclattice.HeaderMatchType{
 								Exact: &hdr1Value,
 							},
+							CaseSensitive: aws.Bool(false),
 						},
 						{
 							Name: &hdr2,
 							Match: &vpclattice.HeaderMatchType{
 								Exact: &hdr2Value,
 							},
+							CaseSensitive: aws.Bool(false),
 						},
 					},
 					Action: model.RuleAction{
@@ -953,12 +960,125 @@ func Test_RuleModelBuild(t *testing.T) {
 							Match: &vpclattice.HeaderMatchType{
 								Exact: &hdr1Value,
 							},
+							CaseSensitive: aws.Bool(false),
 						},
 						{
 							Name: &hdr2,
 							Match: &vpclattice.HeaderMatchType{
 								Exact: &hdr2Value,
 							},
+							CaseSensitive: aws.Bool(false),
+						},
+					},
+					Action: model.RuleAction{
+						TargetGroups: []*model.RuleTargetGroup{
+							{
+								StackTargetGroupId: "tg-0",
+								Weight:             int64(*backendRef1.Weight),
+							},
+						},
+					},
+				},
+			},
+		},
+		{
+			name:         "1 exact and 4 regular expression header matches",
+			wantErrIsNil: true,
+			route: core.NewHTTPRoute(gwv1beta1.HTTPRoute{
+				ObjectMeta: metav1.ObjectMeta{
+					Name:      "service1",
+					Namespace: "default",
+				},
+				Spec: gwv1beta1.HTTPRouteSpec{
+					CommonRouteSpec: gwv1beta1.CommonRouteSpec{
+						ParentRefs: []gwv1beta1.ParentReference{
+							{
+								Name:        "gw1",
+								SectionName: &httpSectionName,
+							},
+						},
+					},
+					Rules: []gwv1beta1.HTTPRouteRule{
+						{
+							Matches: []gwv1beta1.HTTPRouteMatch{
+								{
+									Headers: []gwv1beta1.HTTPHeaderMatch{
+										{
+											Type:  &k8sHeaderExactType,
+											Name:  gwv1beta1.HTTPHeaderName("exact-match-header"),
+											Value: "testv1",
+										},
+										{
+											Type:  &k8sHeaderRegexType,
+											Name:  gwv1beta1.HTTPHeaderName("case-sensitive-prefix-match-header"),
+											Value: "^foo",
+										},
+										{
+											Type:  &k8sHeaderRegexType,
+											Name:  gwv1beta1.HTTPHeaderName("case-insensitive-prefix-match-header"),
+											Value: "(?i)^f",
+										},
+										{
+											Type:  &k8sHeaderRegexType,
+											Name:  gwv1beta1.HTTPHeaderName("case-insensitive-contains-match-header"),
+											Value: "(?i)bAz",
+										},
+										{
+											Type:  &k8sHeaderRegexType,
+											Name:  gwv1beta1.HTTPHeaderName("case-insensitive-exact-match-header"),
+											Value: "(?i)^baR$",
+										},
+									},
+								},
+							},
+							BackendRefs: []gwv1beta1.HTTPBackendRef{
+								{
+									BackendRef: backendRef1,
+								},
+							},
+						},
+					},
+				},
+			}),
+			expectedSpec: []model.RuleSpec{
+				{
+					StackListenerId: "listener-id",
+					MatchedHeaders: []vpclattice.HeaderMatch{
+						{
+							Name: aws.String("exact-match-header"),
+							Match: &vpclattice.HeaderMatchType{
+								Exact: aws.String("testv1"),
+							},
+							CaseSensitive: aws.Bool(false),
+						},
+
+						{
+							Name: aws.String("case-sensitive-prefix-match-header"),
+							Match: &vpclattice.HeaderMatchType{
+								Prefix: aws.String("foo"),
+							},
+							CaseSensitive: aws.Bool(true),
+						},
+						{
+							Name: aws.String("case-insensitive-prefix-match-header"),
+							Match: &vpclattice.HeaderMatchType{
+								Prefix: aws.String("f"),
+							},
+							CaseSensitive: aws.Bool(false),
+						},
+						{
+							Name: aws.String("case-insensitive-contains-match-header"),
+							Match: &vpclattice.HeaderMatchType{
+								Contains: aws.String("bAz"),
+							},
+							CaseSensitive: aws.Bool(false),
+						},
+						{
+							Name: aws.String("case-insensitive-exact-match-header"),
+							Match: &vpclattice.HeaderMatchType{
+								Exact: aws.String("baR"),
+							},
+							CaseSensitive: aws.Bool(false),
 						},
 					},
 					Action: model.RuleAction{
@@ -1290,8 +1410,8 @@ func Test_RuleModelBuild(t *testing.T) {
 										},
 										{
 											Name:  "foo4",
-											Value: "bar4",
-											Type:  &k8sHeaderExactType,
+											Value: "^bar4",
+											Type:  &k8sHeaderRegexType,
 										},
 										{
 											Name:  "foo5",
@@ -1330,30 +1450,35 @@ func Test_RuleModelBuild(t *testing.T) {
 							Match: &vpclattice.HeaderMatchType{
 								Exact: aws.String("bar1"),
 							},
+							CaseSensitive: aws.Bool(false),
 						},
 						{
 							Name: aws.String("foo2"),
 							Match: &vpclattice.HeaderMatchType{
 								Exact: aws.String("bar2"),
 							},
+							CaseSensitive: aws.Bool(false),
 						},
 						{
 							Name: aws.String("foo3"),
 							Match: &vpclattice.HeaderMatchType{
 								Exact: aws.String("bar3"),
 							},
+							CaseSensitive: aws.Bool(false),
 						},
 						{
 							Name: aws.String("foo4"),
 							Match: &vpclattice.HeaderMatchType{
 								Exact: aws.String("bar4"),
 							},
+							CaseSensitive: aws.Bool(false),
 						},
 						{
 							Name: aws.String("foo5"),
 							Match: &vpclattice.HeaderMatchType{
 								Exact: aws.String("bar5"),
 							},
+							CaseSensitive: aws.Bool(false),
 						},
 					},
 				},
@@ -1421,7 +1546,7 @@ func validateEqual(t *testing.T, expectedRules []model.RuleSpec, actualRules []*
 		// priority is not determined by model building, but in synthesis, so we don't
 		// validate priority here
 
-		assert.True(t, reflect.DeepEqual(expectedSpec.MatchedHeaders, actualRule.Spec.MatchedHeaders))
+		assert.Equal(t, expectedSpec.MatchedHeaders, actualRule.Spec.MatchedHeaders)
 
 		assert.Equal(t, len(expectedSpec.Action.TargetGroups), len(actualRule.Spec.Action.TargetGroups))
 		for j, etg := range expectedSpec.Action.TargetGroups {
@@ -1431,5 +1556,71 @@ func validateEqual(t *testing.T, expectedRules []model.RuleSpec, actualRules []*
 			assert.Equal(t, etg.StackTargetGroupId, atg.StackTargetGroupId)
 			assert.Equal(t, etg.SvcImportTG, etg.SvcImportTG)
 		}
+	}
+}
+
+func Test_toControllerSupportedHeaderMatch(t *testing.T) {
+	tests := []struct {
+		name          string
+		regex         string
+		expectedType  LatticeHeaderMatchType
+		caseSensitive bool
+		value         string
+		wantErr       bool
+	}{
+		// Valid cases
+		{"ValidCaseSensitivePrefix", "^foo", LatticeHeaderMatchTypePrefix, true, "foo", false},
+		{"ValidCaseSensitiveContains", "foo", LatticeHeaderMatchTypeContains, true, "foo", false},
+		{"ValidCaseSensitiveExact", "^baz$", LatticeHeaderMatchTypeExact, true, "baz", false},
+		{"ValidCaseInsensitivePrefix", "(?i)^foo", LatticeHeaderMatchTypePrefix, false, "foo", false},
+		{"ValidCaseInsensitiveContains", "(?i)bAr", LatticeHeaderMatchTypeContains, false, "bAr", false},
+		{"ValidCaseInsensitiveExact", "(?i)^baz$", LatticeHeaderMatchTypeExact, false, "baz", false},
+		{"ValidAlphanumericLiteral", "123fooABC", LatticeHeaderMatchTypeContains, true, "123fooABC", false},
+		{"ValidNumericLiteral", "123456", LatticeHeaderMatchTypeContains, true, "123456", false},
+
+		// Invalid cases - unsupported syntax for current regex subset
+		{"InvalidRegexWithGroup", "(?i)foo(bar)", "", false, "", true},
+		{"InvalidRegexWithOr", "foo|bar", "", false, "", true},
+		{"InvalidRegexWithEndAnchor", "foo$", "", false, "", true},
+		{"InvalidRegexWithStartAndGroup", "^foo(bar)", "", false, "", true},
+		{"InvalidRegexWithCharacterSet", "[a-z]+", "", false, "", true},
+		{"InvalidRegexWithQuantifier", "foo*", "", false, "", true},
+		{"InvalidRegexWithQuantifierPlus", "foo+", "", false, "", true},
+		{"InvalidRegexWithDigits", "\\d{3}", "", false, "", true},
+		{"InvalidRegexWithWordBoundary", "\\bfoo", "", false, "", true},
+		{"InvalidRegexWithEscapeChars", "foo\\nbar", "", false, "", true},
+
+		// Invalid cases - literals with unsupported characters or spaces
+		{"InvalidLiteralWithSpace", "just a string", "", false, "", true},
+		{"InvalidLiteralWithSpaceInPrefix", "^just a string", "", false, "", true},
+		{"InvalidLiteralWithSpaceInExact", "^just a string$", "", false, "", true},
+
+		// Edge cases
+		{"EmptyString", "", LatticeHeaderMatchTypePrefix, false, "", false},
+		{"OnlyCaret", "^", LatticeHeaderMatchTypePrefix, false, "", false},
+		{"OnlyDollar", "$", "", false, "", true},
+		{"CaretAndDollar", "^$", LatticeHeaderMatchTypeExact, false, "", false},
+		{"CaretAndDollarCaseInsensitive", "(?i)^$", LatticeHeaderMatchTypeExact, false, "", false},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			gotType, gotCaseSensitive, gotValue, err := toLatticeHeaderMatch(tt.regex)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("toLatticeHeaderMatch() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !tt.wantErr {
+				if gotType != tt.expectedType {
+					t.Errorf("toLatticeHeaderMatch() gotType = %v, want %v", gotType, tt.expectedType)
+				}
+				if gotCaseSensitive != tt.caseSensitive {
+					t.Errorf("toLatticeHeaderMatch() gotCaseSensitive = %v, want %v", gotCaseSensitive, tt.caseSensitive)
+				}
+				if gotValue != tt.value {
+					t.Errorf("toLatticeHeaderMatch() gotValue = %v, want %v", gotValue, tt.value)
+				}
+			}
+		})
 	}
 }

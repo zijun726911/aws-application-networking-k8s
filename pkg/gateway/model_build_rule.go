@@ -4,6 +4,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"regexp"
+	"strings"
+
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/types"
 	mcsv1alpha1 "sigs.k8s.io/mcs-api/pkg/apis/v1alpha1"
@@ -20,13 +23,18 @@ import (
 	model "github.com/aws/aws-application-networking-k8s/pkg/model/lattice"
 )
 
+type LatticeHeaderMatchType string
+
 const (
-	LATTICE_NO_SUPPORT_FOR_MULTIPLE_MATCHES = "LATTICE_NO_SUPPORT_FOR_MULTIPLE_MATCHES"
-	LATTICE_EXCEED_MAX_HEADER_MATCHES       = "LATTICE_EXCEED_MAX_HEADER_MATCHES"
-	LATTICE_UNSUPPORTED_MATCH_TYPE          = "LATTICE_UNSUPPORTED_MATCH_TYPE"
-	LATTICE_UNSUPPORTED_HEADER_MATCH_TYPE   = "LATTICE_UNSUPPORTED_HEADER_MATCH_TYPE"
-	LATTICE_UNSUPPORTED_PATH_MATCH_TYPE     = "LATTICE_UNSUPPORTED_PATH_MATCH_TYPE"
-	LATTICE_MAX_HEADER_MATCHES              = 5
+	LATTICE_NO_SUPPORT_FOR_MULTIPLE_MATCHES                        = "LATTICE_NO_SUPPORT_FOR_MULTIPLE_MATCHES"
+	LATTICE_EXCEED_MAX_HEADER_MATCHES                              = "LATTICE_EXCEED_MAX_HEADER_MATCHES"
+	LATTICE_UNSUPPORTED_MATCH_TYPE                                 = "LATTICE_UNSUPPORTED_MATCH_TYPE"
+	LATTICE_UNSUPPORTED_HEADER_MATCH_TYPE                          = "LATTICE_UNSUPPORTED_HEADER_MATCH_TYPE"
+	LATTICE_UNSUPPORTED_PATH_MATCH_TYPE                            = "LATTICE_UNSUPPORTED_PATH_MATCH_TYPE"
+	LATTICE_MAX_HEADER_MATCHES                                     = 5 //https://docs.aws.amazon.com/vpc-lattice/latest/APIReference/API_HttpMatch.html
+	LatticeHeaderMatchTypeExact             LatticeHeaderMatchType = "exact"
+	LatticeHeaderMatchTypePrefix            LatticeHeaderMatchType = "prefix"
+	LatticeHeaderMatchTypeContains          LatticeHeaderMatchType = "contains"
 )
 
 func (t *latticeServiceModelBuildTask) buildRules(ctx context.Context, stackListenerId string) error {
@@ -177,25 +185,98 @@ func (t *latticeServiceModelBuildTask) updateRuleSpecWithHeaderMatches(match cor
 
 	for _, header := range match.Headers() {
 		t.log.Debugf("Examining match.Header: header.Type %s", *header.Type())
-		if header.Type() != nil && *header.Type() != gwv1beta1.HeaderMatchExact {
-			t.log.Debugf("Unsupported header matchtype %s for httproute %s-%s",
-				*header.Type(), t.route.Name(), t.route.Namespace())
-			return errors.New(LATTICE_UNSUPPORTED_HEADER_MATCH_TYPE)
+		var latticeHeaderMatch vpclattice.HeaderMatch
+		switch *header.Type() {
+		case gwv1beta1.HeaderMatchExact:
+			latticeHeaderMatch = vpclattice.HeaderMatch{
+				Match: &vpclattice.HeaderMatchType{
+					Exact: aws.String(header.Value()),
+				},
+				Name:          aws.String(header.Name()),
+				CaseSensitive: aws.Bool(false),
+			}
+		case gwv1beta1.HeaderMatchRegularExpression:
+			matchType, caseSensitive, latticeMatchValue, err := toLatticeHeaderMatch(header.Value())
+			latticeHeaderMatch = vpclattice.HeaderMatch{
+				CaseSensitive: aws.Bool(caseSensitive),
+				Name:          aws.String(header.Name()),
+				Match:         &vpclattice.HeaderMatchType{},
+			}
+			if err != nil {
+				t.log.Errorf("Unsupported regex header match type: %s, name: %s value %s for httproute %s/%s", header.Name(), t.route.Name(), t.route.Namespace())
+				continue
+			}
+			switch matchType {
+			case LatticeHeaderMatchTypeExact:
+				latticeHeaderMatch.Match.Exact = aws.String(latticeMatchValue)
+			case LatticeHeaderMatchTypePrefix:
+				latticeHeaderMatch.Match.Prefix = aws.String(latticeMatchValue)
+			case LatticeHeaderMatchTypeContains:
+				latticeHeaderMatch.Match.Contains = aws.String(latticeMatchValue)
+			}
 		}
+		ruleSpec.MatchedHeaders = append(ruleSpec.MatchedHeaders, latticeHeaderMatch)
+	}
+	return nil
+}
 
-		matchType := vpclattice.HeaderMatchType{
-			Exact: aws.String(header.Value()),
-		}
-		headerName := header.Name()
+/*
+		Current controller only support a small subset of regex, only support  'Prefix', 'Contains' and 'CaseInsensitive' matches.
+	    for example:
+		Case sensitive Prefix: ^foo
+		Case sensitive Contains: bar
+		Case sensitive Exact: ^baz$
+		Case Insensitive Prefix: (?i)^foo
+		Case Insensitive Contains: (?i)bar
+		Case Insensitive Exact: (?i)^baz$
+*/
+var alphanumeric = regexp.MustCompile("^[a-zA-Z0-9_]*$")
 
-		headerMatch := vpclattice.HeaderMatch{}
-		headerMatch.Match = &matchType
-		headerMatch.Name = &headerName
-
-		ruleSpec.MatchedHeaders = append(ruleSpec.MatchedHeaders, headerMatch)
+func toLatticeHeaderMatch(regex string) (LatticeHeaderMatchType, bool, string, error) {
+	// Pre-checks some special cases
+	if regex == "" || regex == "^" {
+		return LatticeHeaderMatchTypePrefix, false, "", nil
 	}
 
-	return nil
+	if regex == "$" {
+		return "", false, "", errors.New("invalid regex: '$' on its own is not supported")
+	}
+
+	if regex == "^$" {
+		return LatticeHeaderMatchTypeExact, false, "", nil
+	}
+
+	if regex == "(?i)^$" {
+		return LatticeHeaderMatchTypeExact, false, "", nil
+	}
+	caseSensitive := !strings.HasPrefix(regex, "(?i)")
+	if !caseSensitive {
+		regex = strings.TrimPrefix(regex, "(?i)")
+
+	}
+
+	// Determine match type and remove markers
+	var matchType LatticeHeaderMatchType
+	switch {
+	case strings.HasPrefix(regex, "^") && strings.HasSuffix(regex, "$"):
+		matchType = LatticeHeaderMatchTypeExact
+		regex = strings.TrimPrefix(regex, "^")
+		regex = strings.TrimSuffix(regex, "$")
+	case strings.HasPrefix(regex, "^"):
+		matchType = LatticeHeaderMatchTypePrefix
+		regex = strings.TrimPrefix(regex, "^")
+	case !strings.HasPrefix(regex, "^") && !strings.HasSuffix(regex, "$"):
+		matchType = LatticeHeaderMatchTypeContains
+	default:
+		// If it has unsupported syntax (like, only ending with $ without starting with ^), return an error
+		return "", false, "", errors.New("unsupported regex syntax")
+	}
+
+	// Check if the remaining part of the string is alphanumeric string
+	if !alphanumeric.MatchString(regex) {
+		return "", false, "", errors.New("regex contains unsupported characters or syntax")
+	}
+	return matchType, caseSensitive, regex, nil
 }
 
 func (t *latticeServiceModelBuildTask) getTargetGroupsForRuleAction(ctx context.Context, rule core.RouteRule) ([]*model.RuleTargetGroup, error) {

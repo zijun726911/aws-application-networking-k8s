@@ -4,8 +4,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/aws/aws-application-networking-k8s/pkg/utils/gwlog"
 	"reflect"
+
+	"github.com/aws/aws-application-networking-k8s/pkg/utils/gwlog"
 
 	"github.com/aws/aws-sdk-go/aws"
 
@@ -314,7 +315,7 @@ func updateMatchFromRule(httpMatch *vpclattice.HttpMatch, modelRule *model.Rule)
 		headerMatch := vpclattice.HeaderMatch{
 			Match:         modelRule.Spec.MatchedHeaders[i].Match,
 			Name:          modelRule.Spec.MatchedHeaders[i].Name,
-			CaseSensitive: aws.Bool(false), // see HTTPHeaderMatch.HTTPHeaderName in gw spec
+			CaseSensitive: modelRule.Spec.MatchedHeaders[i].CaseSensitive,
 		}
 		httpMatch.HeaderMatches = append(httpMatch.HeaderMatches, &headerMatch)
 	}
