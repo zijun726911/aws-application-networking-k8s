@@ -8,16 +8,23 @@ spec:
     sectionName: http
   rules:
   - backendRefs:
-    - name: parking-ver1
+    - name: parking
       kind: Service
     matches:
-    - path:
-        type: PathPrefix
-        value: /ver1
-  - backendRefs:
-    - name: parking-ver2
-      kind: ServiceImport
-    matches:
-    - path:
-        type: PathPrefix
-        value: /ver2
+    - headers:
+        - type: RegularExpression
+          name: env
+          value: (?i)^canary1$
+        - type: RegularExpression
+          name: user
+          value: (?i)^my_user$
+#    - path:
+#        type: PathPrefix
+#        value: /ver1
+#  - backendRefs:
+#    - name: parking-ver2
+#      kind: ServiceImport
+#    matches:
+#    - path:
+#        type: PathPrefix
+#        value: /ver2

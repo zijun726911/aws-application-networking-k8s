@@ -5,7 +5,7 @@ metadata:
   labels:
     app: parking
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: parking
@@ -22,15 +22,15 @@ spec:
           value: "parking handler pod"
 
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: parking
-spec:
-  selector:
-    app: parking
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8090
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: parking
+#spec:
+#  selector:
+#    app: parking
+#  ports:
+#    - protocol: TCP
+#      port: 80
+#      targetPort: 8090
