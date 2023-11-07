@@ -47,7 +47,7 @@ func (t *latticeServiceModelBuildTask) buildRules(ctx context.Context, stackList
 		}
 
 		if len(rule.Matches()) > 1 {
-			// only support 1 match today
+			// TODO: support multiple matches for one rule. e.g., one rule both have path match and header match
 			return errors.New(LATTICE_NO_SUPPORT_FOR_MULTIPLE_MATCHES)
 		} else if len(rule.Matches()) > 0 {
 			t.log.Debugf("Processing rule match")
@@ -230,7 +230,11 @@ func (t *latticeServiceModelBuildTask) updateRuleSpecWithHeaderMatches(match cor
 		Case Insensitive Contains: (?i)bar
 		Case Insensitive Exact: (?i)^baz$
 */
-var alphanumeric = regexp.MustCompile("^[a-zA-Z0-9_]*$")
+
+// TODO:  allow LITERAL match only for all special characters(_ :;.,\/"'?!(){}[]@<>=-+*#$&`|~^%).  literal means, for example, allow to match plaintext `[`, `]` but cannot use `[`, `]` to denote a  regex character class.
+//
+//	currently miss the literal ^$\+* character class [], and capture group ()
+var httpHeaderValueAllowedCharRegex = regexp.MustCompile("^[a-zA-Z0-9_ :;.,/\"'?!{}@<>=\\-#&`~%]*$")
 
 func toLatticeHeaderMatch(regex string) (LatticeHeaderMatchType, bool, string, error) {
 	// Pre-checks some special cases
@@ -272,8 +276,8 @@ func toLatticeHeaderMatch(regex string) (LatticeHeaderMatchType, bool, string, e
 		return "", false, "", errors.New("unsupported regex syntax")
 	}
 
-	// Check if the remaining part of the string is alphanumeric string
-	if !alphanumeric.MatchString(regex) {
+	// Check if the remaining part of the string is httpHeaderValueAllowedCharRegex string
+	if !httpHeaderValueAllowedCharRegex.MatchString(regex) {
 		return "", false, "", errors.New("regex contains unsupported characters or syntax")
 	}
 	return matchType, caseSensitive, regex, nil

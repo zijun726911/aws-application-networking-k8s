@@ -1577,6 +1577,9 @@ func Test_toControllerSupportedHeaderMatch(t *testing.T) {
 		{"ValidCaseInsensitiveExact", "(?i)^baz$", LatticeHeaderMatchTypeExact, false, "baz", false},
 		{"ValidAlphanumericLiteral", "123fooABC", LatticeHeaderMatchTypeContains, true, "123fooABC", false},
 		{"ValidNumericLiteral", "123456", LatticeHeaderMatchTypeContains, true, "123456", false},
+		{"Valid CaseInsensitive with dash", "(?i)my-header-value", LatticeHeaderMatchTypeContains, false, "my-header-value", false},
+		{"Valid prefix Case sensitive with underscore", "^my_header_value", LatticeHeaderMatchTypePrefix, true, "my_header_value", false},
+		//{"Valid prefix Case sensitive with underscore", "^my_header_value", LatticeHeaderMatchTypePrefix, true, "my_header_value", false},
 
 		// Invalid cases - unsupported syntax for current regex subset
 		{"InvalidRegexWithGroup", "(?i)foo(bar)", "", false, "", true},
