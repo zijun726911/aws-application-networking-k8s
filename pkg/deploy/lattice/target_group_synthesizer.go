@@ -12,7 +12,6 @@ import (
 
 	anv1alpha1 "github.com/aws/aws-application-networking-k8s/pkg/apis/applicationnetworking/v1alpha1"
 	"github.com/aws/aws-application-networking-k8s/pkg/gateway"
-
 	"github.com/aws/aws-application-networking-k8s/pkg/utils/gwlog"
 
 	"k8s.io/apimachinery/pkg/types"
@@ -344,9 +343,9 @@ func (t *TargetGroupSynthesizer) shouldDeleteRouteTg(
 		return true // safe to delete
 	}
 
-	// here we just delete anything more than X minutes old - worst case we'll have to recreate
+	// here we just delete anything more than X hours old - worst case we'll have to recreate
 	// the target group - note this case is only theoretically possible at this point
-	fiveMinsAgo := time.Now().Add(-time.Minute * 5)
+	fiveMinsAgo := time.Now().Add(-time.Hour * 5)
 	if fiveMinsAgo.After(aws.TimeValue(latticeTg.getTargetGroupOutput.CreatedAt)) {
 		t.log.Debugf("Will delete TargetGroup %s (%s) - TG is more than 5 minutes old",
 			*latticeTg.getTargetGroupOutput.Arn, *latticeTg.getTargetGroupOutput.Name)

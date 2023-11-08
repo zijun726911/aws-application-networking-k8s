@@ -6,6 +6,7 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/service/resourcegroupstaggingapi"
 	"github.com/aws/aws-sdk-go/service/vpclattice"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 
@@ -113,7 +114,7 @@ func (s *defaultTargetGroupManager) create(ctx context.Context, modelTg *model.T
 		Id:   aws.StringValue(resp.Id)}, nil
 }
 
-func (s *defaultTargetGroupManager) update(ctx context.Context, targetGroup *model.TargetGroup, latticeTgSummary *vpclattice.TargetGroupSummary) (model.TargetGroupStatus, error) {
+func (s *defaultTargetGroupManager) update(ctx context.Context, targetGroup *model.TargetGroup, latticeTgSummary *vpclattice.GetTargetGroupOutput) (model.TargetGroupStatus, error) {
 	healthCheckConfig := targetGroup.Spec.HealthCheckConfig
 
 	if healthCheckConfig == nil {
@@ -246,79 +247,109 @@ type tgListOutput struct {
 func (s *defaultTargetGroupManager) List(ctx context.Context) ([]tgListOutput, error) {
 	lattice := s.cloud.Lattice()
 	var tgList []tgListOutput
-	targetGroupListInput := vpclattice.ListTargetGroupsInput{}
+	targetGroupListInput := vpclattice.ListTargetGroupsInput{
+		VpcIdentifier:   aws.String(config.VpcID),
+		TargetGroupType: aws.String(vpclattice.TargetGroupTypeIp),
+	}
 	resp, err := lattice.ListTargetGroupsAsList(ctx, &targetGroupListInput)
 	if err != nil {
 		return nil, err
 	}
-
+	if len(resp) == 0 {
+		return nil, nil
+	}
+	tgArns := utils.SliceMap(resp, func(tg *vpclattice.TargetGroupSummary) *string { return tg.Arn })
+	taggingApiResp, err := s.cloud.TaggingApi().GetResourcesWithContext(ctx, &resourcegroupstaggingapi.GetResourcesInput{
+		ResourceARNList: tgArns,
+	})
+	tgArnToTagsMap := make(map[string][]*resourcegroupstaggingapi.Tag)
+	for _, tagMapping := range taggingApiResp.ResourceTagMappingList {
+		tgArnToTagsMap[*tagMapping.ResourceARN] = tagMapping.Tags
+	}
+	if err != nil {
+		return nil, err
+	}
 	for _, tg := range resp {
 		tgInput := vpclattice.GetTargetGroupInput{
 			TargetGroupIdentifier: tg.Id,
 		}
-
 		tgOutput, err := lattice.GetTargetGroupWithContext(ctx, &tgInput)
 		if err != nil {
 			continue
 		}
-
-		if tgOutput.Config != nil && aws.StringValue(tgOutput.Config.VpcIdentifier) == config.VpcID {
-			tagsInput := vpclattice.ListTagsForResourceInput{
-				ResourceArn: tg.Arn,
-			}
-
-			tagsOutput, err := lattice.ListTagsForResourceWithContext(ctx, &tagsInput)
-			if err != nil {
-				s.log.Infof("Failed ListTags %s: %s", aws.StringValue(tg.Arn), err)
-				// setting it to nil, so the caller knows this failed
-				tagsOutput = nil
-			}
-			tgOutput := tgListOutput{
-				getTargetGroupOutput: *tgOutput,
-				targetGroupTags:      tagsOutput,
-			}
-			tgList = append(tgList, tgOutput)
-		}
+		tgList = append(tgList, tgListOutput{
+			getTargetGroupOutput: *tgOutput,
+			targetGroupTags: &vpclattice.ListTagsForResourceOutput{
+				Tags: tagsMapFromTaggingApiTags(tgArnToTagsMap[*tg.Arn]),
+			},
+		})
 	}
 	return tgList, err
+}
+
+func tagsMapFromTaggingApiTags(tags []*resourcegroupstaggingapi.Tag) map[string]*string {
+	out := make(map[string]*string)
+	for _, tag := range tags {
+		out[*tag.Key] = tag.Value
+	}
+	return out
 }
 
 func (s *defaultTargetGroupManager) findTargetGroup(
 	ctx context.Context,
 	modelTargetGroup *model.TargetGroup,
-) (*vpclattice.TargetGroupSummary, error) {
-	listInput := vpclattice.ListTargetGroupsInput{
-		VpcIdentifier: aws.String(modelTargetGroup.Spec.VpcId),
-	}
-	resp, err := s.cloud.Lattice().ListTargetGroupsAsList(ctx, &listInput)
+) (*vpclattice.GetTargetGroupOutput, error) {
+	resp, err := s.cloud.TaggingApi().GetResourcesWithContext(ctx, &resourcegroupstaggingapi.GetResourcesInput{
+		TagFilters: []*resourcegroupstaggingapi.TagFilter{
+			{
+				Key:    aws.String(model.K8SClusterNameKey),
+				Values: []*string{aws.String(modelTargetGroup.Spec.K8SClusterName)},
+			},
+			{
+				Key:    aws.String(model.K8SServiceNameKey),
+				Values: []*string{aws.String(modelTargetGroup.Spec.K8SServiceName)},
+			},
+			{
+				Key:    aws.String(model.K8SServiceNamespaceKey),
+				Values: []*string{aws.String(modelTargetGroup.Spec.K8SServiceNamespace)},
+			},
+			{
+				Key:    aws.String(model.K8SSourceTypeKey),
+				Values: []*string{aws.String(string(modelTargetGroup.Spec.K8SSourceType))},
+			},
+			{
+				Key:    aws.String(model.K8SRouteNamespaceKey),
+				Values: []*string{aws.String(modelTargetGroup.Spec.K8SRouteNamespace)},
+			},
+			{
+				Key:    aws.String(model.K8SRouteNameKey),
+				Values: []*string{aws.String(modelTargetGroup.Spec.K8SRouteName)},
+			},
+		},
+		ResourceTypeFilters: []*string{aws.String("vpc-lattice:targetgroup")},
+	})
 	if err != nil {
 		return nil, err
 	}
+	if len(resp.ResourceTagMappingList) == 0 {
+		return nil, nil
+	}
 
-	for _, latticeTg := range resp {
-		// we ignore create failed status, so may as well check for it first
-		status := aws.StringValue(latticeTg.Status)
-		if status == vpclattice.TargetGroupStatusCreateFailed {
-			continue
-		}
-
-		isMatch, err := s.IsTargetGroupMatch(ctx, modelTargetGroup, latticeTg, nil)
-		if err != nil {
-			return nil, err
-		}
-		if isMatch {
-			s.log.Debugf("Target group %s already exists with arn %s", *latticeTg.Name, *latticeTg.Arn)
-			switch status {
-			case vpclattice.TargetGroupStatusCreateInProgress:
-				return nil, errors.New(LATTICE_RETRY)
-			case vpclattice.TargetGroupStatusActive:
-				return latticeTg, nil
-			case vpclattice.TargetGroupStatusDeleteFailed:
-				return latticeTg, nil
-			case vpclattice.TargetGroupStatusDeleteInProgress:
-				return nil, errors.New(LATTICE_RETRY)
-			}
-		}
+	latticeTg, err := s.cloud.Lattice().GetTargetGroup(&vpclattice.GetTargetGroupInput{
+		TargetGroupIdentifier: resp.ResourceTagMappingList[0].ResourceARN,
+	})
+	if err != nil {
+		return nil, err
+	}
+	switch *latticeTg.Status {
+	case vpclattice.TargetGroupStatusCreateInProgress:
+		return nil, errors.New(LATTICE_RETRY)
+	case vpclattice.TargetGroupStatusActive:
+		return latticeTg, nil
+	case vpclattice.TargetGroupStatusDeleteFailed:
+		return latticeTg, nil
+	case vpclattice.TargetGroupStatusDeleteInProgress:
+		return nil, errors.New(LATTICE_RETRY)
 	}
 
 	return nil, nil

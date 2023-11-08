@@ -3,18 +3,22 @@ package aws
 import (
 	"fmt"
 
+	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/request"
 	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/resourcegroupstaggingapi"
 	"github.com/aws/aws-sdk-go/service/vpclattice"
 	"golang.org/x/exp/maps"
 
 	"context"
-	"github.com/aws/aws-application-networking-k8s/pkg/aws/services"
-	"github.com/aws/aws-application-networking-k8s/pkg/utils/gwlog"
-	"github.com/prometheus/client_golang/prometheus"
-	"sigs.k8s.io/controller-runtime/pkg/metrics"
 	"strconv"
 	"time"
+
+	"github.com/prometheus/client_golang/prometheus"
+	"sigs.k8s.io/controller-runtime/pkg/metrics"
+
+	"github.com/aws/aws-application-networking-k8s/pkg/aws/services"
+	"github.com/aws/aws-application-networking-k8s/pkg/utils/gwlog"
 )
 
 const (
@@ -34,6 +38,7 @@ type CloudConfig struct {
 type Cloud interface {
 	Config() CloudConfig
 	Lattice() services.Lattice
+	TaggingApi() *resourcegroupstaggingapi.ResourceGroupsTaggingAPI
 
 	// creates lattice tags with default values populated
 	DefaultTags() services.Tags
@@ -101,15 +106,17 @@ func NewCloud(log gwlog.Logger, cfg CloudConfig) (Cloud, error) {
 	})
 
 	lattice := services.NewDefaultLattice(sess, cfg.Region)
-	cl := NewDefaultCloud(lattice, cfg)
+	taggingapi := resourcegroupstaggingapi.New(sess, &aws.Config{Region: aws.String(cfg.Region)})
+	cl := NewDefaultCloud(lattice, taggingapi, cfg)
 	return cl, nil
 }
 
 // Used in testing and mocks
-func NewDefaultCloud(lattice services.Lattice, cfg CloudConfig) Cloud {
+func NewDefaultCloud(lattice services.Lattice, taggingapi *resourcegroupstaggingapi.ResourceGroupsTaggingAPI, cfg CloudConfig) Cloud {
 	return &defaultCloud{
 		cfg:          cfg,
 		lattice:      lattice,
+		taggingApi:   taggingapi,
 		managedByTag: getManagedByTag(cfg),
 	}
 }
@@ -117,11 +124,16 @@ func NewDefaultCloud(lattice services.Lattice, cfg CloudConfig) Cloud {
 type defaultCloud struct {
 	cfg          CloudConfig
 	lattice      services.Lattice
+	taggingApi   *resourcegroupstaggingapi.ResourceGroupsTaggingAPI
 	managedByTag string
 }
 
 func (c *defaultCloud) Lattice() services.Lattice {
 	return c.lattice
+}
+
+func (c *defaultCloud) TaggingApi() *resourcegroupstaggingapi.ResourceGroupsTaggingAPI {
+	return c.taggingApi
 }
 
 func (c *defaultCloud) Config() CloudConfig {

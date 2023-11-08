@@ -41,10 +41,11 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/source"
 	gwv1beta1 "sigs.k8s.io/gateway-api/apis/v1beta1"
 
-	"github.com/aws/aws-application-networking-k8s/controllers/eventhandlers"
-	"github.com/aws/aws-application-networking-k8s/pkg/aws/services"
 	pkg_builder "sigs.k8s.io/controller-runtime/pkg/builder"
 	"sigs.k8s.io/controller-runtime/pkg/predicate"
+
+	"github.com/aws/aws-application-networking-k8s/controllers/eventhandlers"
+	"github.com/aws/aws-application-networking-k8s/pkg/aws/services"
 )
 
 const (
@@ -211,7 +212,7 @@ func (r *gatewayReconciler) reconcileUpsert(ctx context.Context, gw *gwv1beta1.G
 	snInfo, err := r.cloud.Lattice().FindServiceNetwork(ctx, gw.Name, config.AccountID)
 	if err != nil {
 		if services.IsNotFoundError(err) {
-			if err = r.updateGatewayProgrammedStatus(ctx, *snInfo.SvcNetwork.Arn, gw, false); err != nil {
+			if err = r.updateGatewayProgrammedStatus(ctx, "", gw, false); err != nil {
 				return err
 			}
 			return nil
