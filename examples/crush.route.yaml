@@ -24,7 +24,7 @@ spec:
       sectionName: http
   rules:
     - backendRefs:
-        - name: inventory-2
+        - name: inventory-1
           kind: Service
           port: 80
           weight: 10
@@ -40,7 +40,7 @@ spec:
       sectionName: http
   rules:
     - backendRefs:
-        - name: inventory-3
+        - name: inventory-1
           kind: Service
           port: 80
           weight: 10
@@ -56,7 +56,7 @@ spec:
       sectionName: http
   rules:
     - backendRefs:
-        - name: inventory-4
+        - name: inventory-1
           kind: Service
           port: 80
           weight: 10
@@ -72,7 +72,7 @@ spec:
       sectionName: http
   rules:
     - backendRefs:
-        - name: inventory-5
+        - name: inventory-1
           kind: Service
           port: 80
           weight: 10
@@ -88,7 +88,7 @@ spec:
       sectionName: http
   rules:
     - backendRefs:
-        - name: inventory-6
+        - name: inventory-1
           kind: Service
           port: 80
           weight: 10
@@ -104,7 +104,7 @@ spec:
       sectionName: http
   rules:
     - backendRefs:
-        - name: inventory-7
+        - name: inventory-1
           kind: Service
           port: 80
           weight: 10
@@ -120,7 +120,7 @@ spec:
       sectionName: http
   rules:
     - backendRefs:
-        - name: inventory-8
+        - name: inventory-1
           kind: Service
           port: 80
           weight: 10
@@ -136,7 +136,7 @@ spec:
       sectionName: http
   rules:
     - backendRefs:
-        - name: inventory-9
+        - name: inventory-1
           kind: Service
           port: 80
           weight: 10
@@ -152,7 +152,7 @@ spec:
       sectionName: http
   rules:
     - backendRefs:
-        - name: inventory-10
+        - name: inventory-1
           kind: Service
           port: 80
           weight: 10

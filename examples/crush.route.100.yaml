@@ -1,0 +1,1600 @@
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-1
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-2
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-3
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-4
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-5
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-6
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-7
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-8
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-9
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-10
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-11
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-12
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-13
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-14
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-15
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-16
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-17
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-18
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-19
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-20
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-21
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-22
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-23
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-24
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-25
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-26
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-27
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-28
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-29
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-30
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-31
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-32
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-33
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-34
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-35
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-36
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-37
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-38
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-39
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-40
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-41
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-42
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-43
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-44
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-45
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-46
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-47
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-48
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-49
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-50
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-51
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-52
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-53
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-54
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-55
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-56
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-57
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-58
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-59
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-60
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-61
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-62
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-63
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-64
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-65
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-66
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-67
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-68
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-69
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-70
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-71
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-72
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-73
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-74
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-75
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-76
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-77
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-78
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-79
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-80
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-81
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-82
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-83
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-84
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-85
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-86
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-87
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-88
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-89
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-90
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-91
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-92
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-93
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-94
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-95
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-96
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-97
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-98
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-99
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: HTTPRoute
+metadata:
+  name: inventory-100
+spec:
+  parentRefs:
+    - name: my-hotel
+      sectionName: http
+  rules:
+    - backendRefs:
+        - name: inventory-1
+          kind: Service
+          port: 80
+          weight: 10
+---
+

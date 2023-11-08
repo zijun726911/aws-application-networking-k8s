@@ -1,14 +1,14 @@
 apiVersion: gateway.networking.k8s.io/v1alpha2
-kind: GRPCRoute
+kind: HTTPRoute
 metadata:
   name: inventory
 spec:
   parentRefs:
   - name: my-hotel
-    sectionName: https
+    sectionName: http
   rules:
   - backendRefs:
-    - name: inventory-ver2
+    - name: inventory-ver1
       kind: Service
       port: 80
       weight: 10

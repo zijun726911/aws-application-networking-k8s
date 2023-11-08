@@ -14,6 +14,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"sigs.k8s.io/controller-runtime/pkg/metrics"
 	"strconv"
+	"time"
 )
 
 const (
@@ -58,17 +59,31 @@ func NewCloud(log gwlog.Logger, cfg CloudConfig) (Cloud, error) {
 		return nil, err
 	}
 
-	apiCounter := prometheus.NewCounterVec(
-		prometheus.CounterOpts{
-			Name: "aws_api_call_total",
-			Help: "Number of AWS API calls",
+	retryDelay := prometheus.NewHistogramVec(
+		prometheus.HistogramOpts{
+			Name:    "aws_api_call_retry_delay_seconds",
+			Help:    "Time cost of AWS API call retries due to throttle, etc.",
+			Buckets: []float64{1, 2, 4, 8, 16, 32, 64},
 		},
 		[]string{"name", "status"},
 	)
-	metrics.Registry.MustRegister(apiCounter)
+	metrics.Registry.MustRegister(retryDelay)
 
+	apiDuration := prometheus.NewHistogramVec(
+		prometheus.HistogramOpts{
+			Name:    "aws_api_call_duration_seconds",
+			Help:    "AWS API Call durations",
+			Buckets: []float64{0.05, 0.1, 0.5, 1, 5, 10},
+		},
+		[]string{"name"},
+	)
+	metrics.Registry.MustRegister(apiDuration)
+
+	sess.Handlers.AfterRetry.PushBack(func(r *request.Request) {
+		retryDelay.WithLabelValues(r.Operation.Name, strconv.Itoa(r.HTTPResponse.StatusCode)).Observe(r.RetryDelay.Seconds())
+	})
 	sess.Handlers.Complete.PushFront(func(r *request.Request) {
-		apiCounter.WithLabelValues(r.Operation.Name, strconv.Itoa(r.HTTPResponse.StatusCode)).Inc()
+		apiDuration.WithLabelValues(r.Operation.Name).Observe(float64(time.Now().Sub(r.AttemptTime).Seconds()))
 		if r.Error != nil {
 			log.Debugw("error",
 				"error", r.Error.Error(),

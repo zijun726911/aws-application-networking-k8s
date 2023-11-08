@@ -8,7 +8,7 @@ spec:
       sectionName: http
   rules:
     - backendRefs:
-        - name: {{svc_name}}
+        - name: inventory-1
           kind: Service
           port: 80
           weight: 10
