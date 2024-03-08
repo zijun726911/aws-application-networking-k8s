@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: nginx-tls
-        image: nginx:1.14.2
+        image: 694065802095.dkr.ecr.us-west-2.amazonaws.com/nginx-server:latest 
         ports:
         - containerPort: 443
 
