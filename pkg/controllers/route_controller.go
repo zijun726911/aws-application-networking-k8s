@@ -57,6 +57,7 @@ import (
 var routeTypeToFinalizer = map[core.RouteType]string{
 	core.HttpRouteType: "httproute.k8s.aws/resources",
 	core.GrpcRouteType: "grpcroute.k8s.aws/resources",
+	core.TlsRouteType:  "tlsroute.k8s.aws/resource",
 }
 
 type routeReconciler struct {
@@ -92,6 +93,7 @@ func RegisterAllRouteControllers(
 	}{
 		{core.HttpRouteType, &gwv1beta1.HTTPRoute{}},
 		{core.GrpcRouteType, &gwv1alpha2.GRPCRoute{}},
+		{core.TlsRouteType, &gwv1alpha2.TLSRoute{}},
 	}
 
 	for _, routeInfo := range routeInfos {
@@ -145,9 +147,9 @@ func RegisterAllRouteControllers(
 	return nil
 }
 
-//+kubebuilder:rbac:groups=gateway.networking.k8s.io,resources=grpcroutes;httproutes,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=gateway.networking.k8s.io,resources=grpcroutes/status;httproutes/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=gateway.networking.k8s.io,resources=grpcroutes/finalizers;httproutes/finalizers,verbs=update
+//+kubebuilder:rbac:groups=gateway.networking.k8s.io,resources=tlsroutes;grpcroutes;httproutes,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=gateway.networking.k8s.io,resources=tlsroutes;grpcroutes/status;httproutes/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=gateway.networking.k8s.io,resources=tlsroutes;grpcroutes/finalizers;httproutes/finalizers,verbs=update
 
 func (r *routeReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	r.log.Infow("reconcile", "name", req.Name)
@@ -202,6 +204,8 @@ func (r *routeReconciler) getRoute(ctx context.Context, req ctrl.Request) (core.
 		return core.GetHTTPRoute(ctx, r.client, req.NamespacedName)
 	case core.GrpcRouteType:
 		return core.GetGRPCRoute(ctx, r.client, req.NamespacedName)
+	case core.TlsRouteType:
+		return core.GetTLSRoute(ctx, r.client, req.NamespacedName)
 	default:
 		return nil, fmt.Errorf("unknown route type for type %s", string(r.routeType))
 	}

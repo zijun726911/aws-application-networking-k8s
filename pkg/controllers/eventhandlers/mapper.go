@@ -177,6 +177,12 @@ func (r *resourceMapper) backendRefToRoutes(ctx context.Context, obj client.Obje
 		for _, k8sRoute := range routeList.Items {
 			routes = append(routes, core.NewGRPCRoute(k8sRoute))
 		}
+	case core.TlsRouteType:
+		routeList := &gateway_api_v1alpha2.TLSRouteList{}
+		r.client.List(ctx, routeList)
+		for _, k8sRoute := range routeList.Items {
+			routes = append(routes, core.NewTLSRoute(k8sRoute))
+		}
 	default:
 		return nil
 	}

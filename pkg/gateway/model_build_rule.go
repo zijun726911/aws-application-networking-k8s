@@ -56,6 +56,8 @@ func (t *latticeServiceModelBuildTask) buildRules(ctx context.Context, stackList
 				if err := t.updateRuleSpecForGrpcRoute(m, &ruleSpec); err != nil {
 					return err
 				}
+
+				// TODO no need for TLSRoute
 			default:
 				return fmt.Errorf("unsupported rule match: %T", m)
 			}
@@ -70,6 +72,7 @@ func (t *latticeServiceModelBuildTask) buildRules(ctx context.Context, stackList
 			if _, ok := rule.(*core.GRPCRouteRule); ok {
 				ruleSpec.Method = string(gwv1.HTTPMethodPost)
 			}
+			// TODO what about TLSRoute
 		}
 
 		ruleTgList, err := t.getTargetGroupsForRuleAction(ctx, rule)
@@ -144,6 +147,7 @@ func (t *latticeServiceModelBuildTask) updateRuleSpecForHttpRoute(m *core.HTTPRo
 	return nil
 }
 
+// TODO, i don't think we need this for TLSRoute
 func (t *latticeServiceModelBuildTask) updateRuleSpecForGrpcRoute(m *core.GRPCRouteMatch, ruleSpec *model.RuleSpec) error {
 	t.log.Debugf("Building rule with GRPCRouteMatch, %+v", *m)
 	ruleSpec.Method = string(gwv1.HTTPMethodPost) // GRPC is always POST

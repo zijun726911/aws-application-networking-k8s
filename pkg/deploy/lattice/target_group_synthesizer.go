@@ -278,6 +278,7 @@ func (t *TargetGroupSynthesizer) shouldDeleteRouteTg(
 	} else {
 		route, err = core.GetHTTPRoute(ctx, t.client, routeName)
 	}
+	// TODO what about TCP route
 
 	if err != nil {
 		if apierrors.IsNotFound(err) {

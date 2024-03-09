@@ -47,7 +47,7 @@ func (l *listenerSynthesizer) Synthesize(ctx context.Context) error {
 		}
 
 		var stackRules []*model.Rule
-		err = l.stack.ListResources(&stackRules)
+		_ = l.stack.ListResources(&stackRules)
 
 		//fmt.Printf("liwwu >> listener's Synthesie stackRules %v \n", *stackRules[0])
 
