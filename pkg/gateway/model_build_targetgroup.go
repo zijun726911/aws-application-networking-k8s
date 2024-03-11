@@ -345,6 +345,13 @@ func (t *backendRefTargetGroupModelBuildTask) buildTargetGroupSpec(ctx context.C
 		parentRefType = model.SourceTypeGRPCRoute
 	}
 
+	// TLSRoute takes precedence over other protocolVersions
+	if _, ok := t.route.(*core.TLSRoute); ok {
+		fmt.Printf("liwwu -- TLS Target Group building \n")
+		protocol = "TCP"	
+		parentRefType = model.SourceTypeTLSRoute	
+	}
+
 	spec := model.TargetGroupSpec{
 		Type:              model.TargetGroupTypeIP,
 		Port:              80,

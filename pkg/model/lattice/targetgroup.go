@@ -69,6 +69,7 @@ const (
 	SourceTypeSvcExport K8SSourceType = "ServiceExport"
 	SourceTypeHTTPRoute K8SSourceType = "HTTPRoute"
 	SourceTypeGRPCRoute K8SSourceType = "GRPCRoute"
+	SourceTypeTLSRoute  K8SSourceType = "TLSRoute"
 	SourceTypeInvalid   K8SSourceType = "INVALID"
 )
 
