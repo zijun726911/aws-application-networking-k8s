@@ -98,7 +98,7 @@ func RegisterAccessLogPolicyController(
 		Watches(&gwv1beta1.Gateway{}, handler.EnqueueRequestsFromMapFunc(r.findImpactedAccessLogPolicies), pkg_builder.WithPredicates(predicate.GenerationChangedPredicate{})).
 		Watches(&gwv1beta1.HTTPRoute{}, handler.EnqueueRequestsFromMapFunc(r.findImpactedAccessLogPolicies), pkg_builder.WithPredicates(predicate.GenerationChangedPredicate{})).
 		Watches(&gwv1alpha2.GRPCRoute{}, handler.EnqueueRequestsFromMapFunc(r.findImpactedAccessLogPolicies), pkg_builder.WithPredicates(predicate.GenerationChangedPredicate{})).
-		Watches(&gwv1alpha2.TCPRoute{}, handler.EnqueueRequestsFromMapFunc(r.findImpactedAccessLogPolicies), pkg_builder.WithPredicates(predicate.GenerationChangedPredicate{}))
+		Watches(&gwv1alpha2.TLSRoute{}, handler.EnqueueRequestsFromMapFunc(r.findImpactedAccessLogPolicies), pkg_builder.WithPredicates(predicate.GenerationChangedPredicate{}))
 
 	return builder.Complete(r)
 }
@@ -243,7 +243,7 @@ func (r *accessLogPolicyReconciler) targetRefExists(ctx context.Context, alp *an
 		grpcRoute := &gwv1alpha2.GRPCRoute{}
 		err = r.client.Get(ctx, targetRefNamespacedName, grpcRoute)
 	case "TLSRoute":
-		tlsRoute := &gwv1alpha2.TCPRoute{}
+		tlsRoute := &gwv1alpha2.TLSRoute{}
 		err = r.client.Get(ctx, targetRefNamespacedName, tlsRoute)
 	default:
 		return false, fmt.Errorf("Access Log Policy targetRef is for unsupported Kind: %s", alp.Spec.TargetRef.Kind)
