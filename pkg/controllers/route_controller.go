@@ -152,7 +152,7 @@ func RegisterAllRouteControllers(
 //+kubebuilder:rbac:groups=gateway.networking.k8s.io,resources=tlsroutes;grpcroutes/finalizers;httproutes/finalizers,verbs=update
 
 func (r *routeReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-	r.log.Infow("reconcile", "name", req.Name)
+	r.log.Infow("reconcile-liwwu-route-reconcile", "name", req.Name)
 	recErr := r.reconcile(ctx, req)
 	if recErr != nil {
 		r.log.Infow("reconcile error", "name", req.Name, "message", recErr.Error())

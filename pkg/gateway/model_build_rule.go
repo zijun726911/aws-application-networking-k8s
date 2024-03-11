@@ -69,6 +69,7 @@ func (t *latticeServiceModelBuildTask) buildRules(ctx context.Context, stackList
 			// Match every traffic on no matches
 			ruleSpec.PathMatchValue = "/"
 			ruleSpec.PathMatchPrefix = true
+			fmt.Printf("liwwu -- no Match rulespec %v \n", ruleSpec)
 			if _, ok := rule.(*core.GRPCRouteRule); ok {
 				ruleSpec.Method = string(gwv1.HTTPMethodPost)
 			}

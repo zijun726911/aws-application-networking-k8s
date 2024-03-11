@@ -48,7 +48,7 @@ func NewServiceManager(log gwlog.Logger, cloud pkg_aws.Cloud) *defaultServiceMan
 	}
 }
 
-func (m *defaultServiceManager) createServiceAndAssociate(ctx context.Context, svc *Service) (ServiceInfo, error) {
+func (m *defaultServiceManager)createServiceAndAssociate(ctx context.Context, svc *Service) (ServiceInfo, error) {
 	createSvcReq := m.newCreateSvcReq(svc)
 	createSvcResp, err := m.cloud.Lattice().CreateServiceWithContext(ctx, createSvcReq)
 	if err != nil {
