@@ -158,7 +158,8 @@ func (t *TargetGroupTagFields) IsSourceTypeServiceExport() bool {
 
 func (t *TargetGroupTagFields) IsSourceTypeRoute() bool {
 	return t.K8SSourceType == SourceTypeHTTPRoute ||
-		t.K8SSourceType == SourceTypeGRPCRoute
+		t.K8SSourceType == SourceTypeGRPCRoute ||
+		t.K8SSourceType == SourceTypeTLSRoute
 }
 
 func (t *TargetGroupSpec) Validate() error {
