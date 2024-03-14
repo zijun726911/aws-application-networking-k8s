@@ -285,7 +285,7 @@ func (s *defaultTargetGroupManager) findTargetGroup(
 		model.TagsFromTGTagFields(modelTargetGroup.Spec.TargetGroupTagFields))
 
 	fmt.Printf("liwwu-findTargetGroup tags %v, arns: %v, err: %v \n",
-	modelTargetGroup.Spec.TargetGroupTagFields, arns, err)	
+		modelTargetGroup.Spec.TargetGroupTagFields, arns, err)
 	if err != nil {
 		return nil, err
 	}

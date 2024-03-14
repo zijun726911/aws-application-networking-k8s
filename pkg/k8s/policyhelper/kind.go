@@ -48,8 +48,8 @@ func GroupKindToObj(gk GroupKind) (client.Object, bool) {
 		return &gwv1alpha2.GRPCRoute{}, true
 	case GroupKind{corev1.GroupName, "Service"}:
 		return &corev1.Service{}, true
-    case GroupKind{anv1alpha1.GroupName, "ServiceExport"}:
-		return &anv1alpha1.ServiceExport{}, true	
+	case GroupKind{anv1alpha1.GroupName, "ServiceExport"}:
+		return &anv1alpha1.ServiceExport{}, true
 	default:
 		return nil, false
 	}

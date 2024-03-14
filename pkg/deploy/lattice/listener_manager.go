@@ -21,7 +21,7 @@ import (
 //go:generate mockgen -destination listener_manager_mock.go -package lattice github.com/aws/aws-application-networking-k8s/pkg/deploy/lattice ListenerManager
 
 type ListenerManager interface {
-	Upsert(ctx context.Context, modelListener *model.Listener, modelSvc *model.Service, moduleTG *model.TargetGroup) (model.ListenerStatus, error)
+	Upsert(ctx context.Context, modelListener *model.Listener, modelSvc *model.Service, moduleTG []*model.RuleTargetGroup) (model.ListenerStatus, error)
 	Delete(ctx context.Context, modelListener *model.Listener) error
 	List(ctx context.Context, serviceID string) ([]*vpclattice.ListenerSummary, error)
 }
@@ -45,7 +45,7 @@ func (d *defaultListenerManager) Upsert(
 	ctx context.Context,
 	modelListener *model.Listener,
 	modelSvc *model.Service,
-	modelTG *model.TargetGroup,
+	modelTGList []*model.RuleTargetGroup,
 ) (model.ListenerStatus, error) {
 	if modelSvc.Status == nil || modelSvc.Status.Id == "" {
 		return model.ListenerStatus{}, errors.New("model service is missing id")
@@ -79,19 +79,23 @@ func (d *defaultListenerManager) Upsert(
 		FixedResponse: &defaultResp,
 	}
 
+	fmt.Printf("liwwu modelListener >>> %v\n", modelListener.Spec)
 	// need to find out the 1st rule
 	if modelListener.Spec.Protocol == "TLS_PASSTHROUGH" {
 
-		fmt.Printf("liwwu >> tg id = %v\n", modelTG.Status.Id)
+		fmt.Printf("liwwu >> modelTGList = %v\n", modelTGList)
 
 		var latticeTGs []*vpclattice.WeightedTargetGroup
 
-		latticeTG := vpclattice.WeightedTargetGroup{
-			TargetGroupIdentifier: aws.String(modelTG.Status.Id),
-			Weight:                aws.Int64(1),
-		}
+		for _, modelTG := range modelTGList {
+			fmt.Printf("liwwu >> modelTG: %v \n", modelTG)
+			latticeTG := vpclattice.WeightedTargetGroup{
+				TargetGroupIdentifier: aws.String(modelTG.LatticeTgId),
+				Weight:                aws.Int64(modelTG.Weight),
+			}
 
-		latticeTGs = append(latticeTGs, &latticeTG)
+			latticeTGs = append(latticeTGs, &latticeTG)
+		}
 
 		action = vpclattice.RuleAction{
 			Forward: &vpclattice.ForwardAction{

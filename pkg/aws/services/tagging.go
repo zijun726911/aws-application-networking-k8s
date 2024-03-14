@@ -1,8 +1,8 @@
 package services
 
 import (
-	"fmt"
 	"context"
+	"fmt"
 	"github.com/aws/aws-application-networking-k8s/pkg/utils"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"

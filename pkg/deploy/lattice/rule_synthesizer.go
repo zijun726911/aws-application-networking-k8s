@@ -167,7 +167,7 @@ func (r *ruleSynthesizer) createOrUpdateRules(ctx context.Context, rule *model.R
 	}
 
 	if stackListener.Spec.Protocol == "TLS_PASSTHROUGH" {
-		fmt.Printf("liwwu >>> skip update rule, since it is TLS_PASSTHROUGH \n")
+		fmt.Printf("liwwu >>> skip update rule, since it is TLS_PASSTHROUGH rule %v \n", *rule)
 		return nil
 	}
 

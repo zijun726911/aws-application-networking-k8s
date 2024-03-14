@@ -15,17 +15,20 @@ import (
 type listenerSynthesizer struct {
 	log         gwlog.Logger
 	listenerMgr ListenerManager
+	tgManager   TargetGroupManager
 	stack       core.Stack
 }
 
 func NewListenerSynthesizer(
 	log gwlog.Logger,
 	ListenerManager ListenerManager,
+	tgManager TargetGroupManager,
 	stack core.Stack,
 ) *listenerSynthesizer {
 	return &listenerSynthesizer{
 		log:         log,
 		listenerMgr: ListenerManager,
+		tgManager:   tgManager,
 		stack:       stack,
 	}
 }
@@ -49,11 +52,53 @@ func (l *listenerSynthesizer) Synthesize(ctx context.Context) error {
 		var stackRules []*model.Rule
 		_ = l.stack.ListResources(&stackRules)
 
-		//fmt.Printf("liwwu >> listener's Synthesie stackRules %v \n", *stackRules[0])
+		fmt.Printf("liwwu >> listener's Synthesie stackRules action %v \n", stackRules[0].Spec.Action)
+		// TODO duplicated code of resolveRuleTgIds for default rule
+		for i, rtg := range stackRules[0].Spec.Action.TargetGroups {
+			if rtg.StackTargetGroupId == "" && rtg.SvcImportTG == nil && rtg.LatticeTgId == "" {
+				return errors.New("rule TG is missing a required target group identifier")
+			}
+			if rtg.LatticeTgId != "" {
+				fmt.Printf("liwwu Rule TG %d already resolved %s\n", i, rtg.LatticeTgId)
+				l.log.Debugf("Rule TG %d already resolved %s", i, rtg.LatticeTgId)
+				continue
+			}
+			if rtg.StackTargetGroupId != "" {
+				if rtg.StackTargetGroupId == model.InvalidBackendRefTgId {
+					l.log.Debugf("Rule TG has an invalid backendref, setting TG id to invalid")
+					rtg.LatticeTgId = model.InvalidBackendRefTgId
+					continue
+				}
 
-		stackTg := &model.TargetGroup{}
-		l.stack.GetResource(stackRules[0].Spec.Action.TargetGroups[0].StackTargetGroupId, stackTg)
-		status, err := l.listenerMgr.Upsert(ctx, listener, svc, stackTg)
+				l.log.Debugf("Fetching TG %d from the stack (ID %s)", i, rtg.StackTargetGroupId)
+
+				stackTg := &model.TargetGroup{}
+				err := l.stack.GetResource(rtg.StackTargetGroupId, stackTg)
+				if err != nil {
+					return err
+				}
+
+				if stackTg.Status == nil {
+					return errors.New("stack target group is missing Status field")
+				}
+				fmt.Printf("liwwu >>> lattice ID %v \n", stackTg.Status.Id)
+				rtg.LatticeTgId = stackTg.Status.Id
+			}
+
+			if rtg.SvcImportTG != nil {
+				l.log.Debugf("Getting target group for service import %s %s (%s, %s)",
+					rtg.SvcImportTG.K8SServiceName, rtg.SvcImportTG.K8SServiceNamespace,
+					rtg.SvcImportTG.K8SClusterName, rtg.SvcImportTG.VpcId)
+				tgId, err := l.findSvcExportTG(ctx, *rtg.SvcImportTG)
+
+				if err != nil {
+					return err
+				}
+				rtg.LatticeTgId = tgId
+			}
+
+		}
+		status, err := l.listenerMgr.Upsert(ctx, listener, svc, stackRules[0].Spec.Action.TargetGroups)
 		if err != nil {
 			listenerErr = errors.Join(listenerErr,
 				fmt.Errorf("failed ListenerManager.Upsert %s-%s due to err %s",
@@ -85,6 +130,30 @@ func (l *listenerSynthesizer) Synthesize(ctx context.Context) error {
 	}
 
 	return nil
+}
+
+func (l *listenerSynthesizer) findSvcExportTG(ctx context.Context, svcImportTg model.SvcImportTargetGroup) (string, error) {
+	tgs, err := l.tgManager.List(ctx)
+	if err != nil {
+		return "", err
+	}
+
+	for _, tg := range tgs {
+		tgTags := model.TGTagFieldsFromTags(tg.tags)
+
+		svcMatch := tgTags.IsSourceTypeServiceExport() && (tgTags.K8SServiceName == svcImportTg.K8SServiceName) &&
+			(tgTags.K8SServiceNamespace == svcImportTg.K8SServiceNamespace)
+
+		clusterMatch := (svcImportTg.K8SClusterName == "") || (tgTags.K8SClusterName == svcImportTg.K8SClusterName)
+
+		vpcMatch := (svcImportTg.VpcId == "") || (svcImportTg.VpcId == aws.StringValue(tg.tgSummary.VpcIdentifier))
+
+		if svcMatch && clusterMatch && vpcMatch {
+			return *tg.tgSummary.Id, nil
+		}
+	}
+
+	return "", errors.New("target group for service import could not be found")
 }
 
 func (l *listenerSynthesizer) shouldDelete(listenerToFind *model.Listener, stackListeners []*model.Listener) bool {
