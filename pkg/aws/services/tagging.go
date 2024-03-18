@@ -2,7 +2,6 @@ package services
 
 import (
 	"context"
-	"fmt"
 	"github.com/aws/aws-application-networking-k8s/pkg/utils"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -66,12 +65,10 @@ func (t *defaultTagging) FindResourcesByTags(ctx context.Context, resourceType R
 		TagFilters:          convertTagsToFilter(tags),
 		ResourceTypeFilters: []*string{aws.String(string(resourceType))},
 	}
-	fmt.Printf("liwwu -- input :%v \n", input)
 	resp, err := t.GetResourcesWithContext(ctx, input)
 	if err != nil {
 		return nil, err
 	}
-	fmt.Printf("liwwu -- resp.ResourceTagMappingList = %v \n ", resp.ResourceTagMappingList)
 	matchingArns := utils.SliceMap(resp.ResourceTagMappingList, func(t *taggingapi.ResourceTagMapping) string {
 		return aws.StringValue(t.ResourceARN)
 	})
