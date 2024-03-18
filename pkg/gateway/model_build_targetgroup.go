@@ -154,7 +154,8 @@ func (t *svcExportTargetGroupModelBuildTask) buildTargetGroup(ctx context.Contex
 	}
 
 	tgp, err := t.tgp.ObjResolvedPolicy(ctx, t.serviceExport)
-	fmt.Printf("liwwu -- t.tgp.ObjResolvedPolicy(ctx, t.serviceExport= %v) tgp = %v, err = %v\n", t.serviceExport, tgp, err)
+	t.log.Debugf("Resolving TG Policy for serviceExport=%v, TargetGroup=%v, err = %v",
+t.serviceExport, tgp, err)
 	if err != nil {
 		return nil, err
 	}
@@ -171,7 +172,6 @@ func (t *svcExportTargetGroupModelBuildTask) buildTargetGroup(ctx context.Contex
 		}
 		healthCheckConfig = parseHealthCheckConfig(tgp)
 
-		fmt.Printf("liwwu -- tg protocol = %v\n", protocol)
 	}
 
 	spec := model.TargetGroupSpec{
@@ -350,7 +350,7 @@ func (t *backendRefTargetGroupModelBuildTask) buildTargetGroupSpec(ctx context.C
 
 	// TLSRoute takes precedence over other protocolVersions
 	if _, ok := t.route.(*core.TLSRoute); ok {
-		fmt.Printf("liwwu -- TLS Target Group building \n")
+		t.log.Debugf("Use TCP for TLS passthrough related Target Group")
 		protocol = "TCP"
 		parentRefType = model.SourceTypeTLSRoute
 	}

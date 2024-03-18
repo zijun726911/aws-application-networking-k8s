@@ -39,7 +39,7 @@ func (t *latticeServiceModelBuildTask) extractListenerInfo(
 				protocol = section.Protocol
 
 				if section.TLS != nil && section.TLS.Mode != nil && *section.TLS.Mode == gwv1.TLSModePassthrough {
-					t.log.Debugf("liwwu: found TLS passthrough section %v", section.TLS)
+					t.log.Debugf("Found TLS passthrough section %v", section.TLS)
 					// overwrite protocol
 					protocol = "TLS_PASSTHROUGH"
 				}
