@@ -52,52 +52,16 @@ func (l *listenerSynthesizer) Synthesize(ctx context.Context) error {
 		var stackRules []*model.Rule
 		_ = l.stack.ListResources(&stackRules)
 
-		fmt.Printf("liwwu >> listener's Synthesie stackRules action %v \n", stackRules[0].Spec.Action)
-		// TODO duplicated code of resolveRuleTgIds for default rule
-		for i, rtg := range stackRules[0].Spec.Action.TargetGroups {
-			if rtg.StackTargetGroupId == "" && rtg.SvcImportTG == nil && rtg.LatticeTgId == "" {
-				return errors.New("rule TG is missing a required target group identifier")
+		if listener.Spec.Protocol == "TLS_PASSTHROUGH" {
+			err := l.updateTGId(ctx, stackRules)
+
+			if err != nil {
+				l.log.Infof("Failed to update TGId, err = %v", err)
+				return err
 			}
-			if rtg.LatticeTgId != "" {
-				fmt.Printf("liwwu Rule TG %d already resolved %s\n", i, rtg.LatticeTgId)
-				l.log.Debugf("Rule TG %d already resolved %s", i, rtg.LatticeTgId)
-				continue
-			}
-			if rtg.StackTargetGroupId != "" {
-				if rtg.StackTargetGroupId == model.InvalidBackendRefTgId {
-					l.log.Debugf("Rule TG has an invalid backendref, setting TG id to invalid")
-					rtg.LatticeTgId = model.InvalidBackendRefTgId
-					continue
-				}
-
-				l.log.Debugf("Fetching TG %d from the stack (ID %s)", i, rtg.StackTargetGroupId)
-
-				stackTg := &model.TargetGroup{}
-				err := l.stack.GetResource(rtg.StackTargetGroupId, stackTg)
-				if err != nil {
-					return err
-				}
-
-				if stackTg.Status == nil {
-					return errors.New("stack target group is missing Status field")
-				}
-				fmt.Printf("liwwu >>> lattice ID %v \n", stackTg.Status.Id)
-				rtg.LatticeTgId = stackTg.Status.Id
-			}
-
-			if rtg.SvcImportTG != nil {
-				l.log.Debugf("Getting target group for service import %s %s (%s, %s)",
-					rtg.SvcImportTG.K8SServiceName, rtg.SvcImportTG.K8SServiceNamespace,
-					rtg.SvcImportTG.K8SClusterName, rtg.SvcImportTG.VpcId)
-				tgId, err := l.findSvcExportTG(ctx, *rtg.SvcImportTG)
-
-				if err != nil {
-					return err
-				}
-				rtg.LatticeTgId = tgId
-			}
-
 		}
+
+		
 		status, err := l.listenerMgr.Upsert(ctx, listener, svc, stackRules[0].Spec.Action.TargetGroups)
 		if err != nil {
 			listenerErr = errors.Join(listenerErr,
@@ -127,6 +91,55 @@ func (l *listenerSynthesizer) Synthesize(ctx context.Context) error {
 				l.log.Infof("Failed ListenerManager.Delete %s due to %s", latticeListenerAsModel.Status.Id, err)
 			}
 		}
+	}
+
+	return nil
+}
+
+func (l *listenerSynthesizer) updateTGId(ctx context.Context, stackRules []*model.Rule) error {
+
+	for i, rtg := range stackRules[0].Spec.Action.TargetGroups {
+		if rtg.StackTargetGroupId == "" && rtg.SvcImportTG == nil && rtg.LatticeTgId == "" {
+			return errors.New("rule TG is missing a required target group identifier")
+		}
+		if rtg.LatticeTgId != "" {
+			l.log.Debugf("Rule TG %d already resolved %s", i, rtg.LatticeTgId)
+			continue
+		}
+		if rtg.StackTargetGroupId != "" {
+			if rtg.StackTargetGroupId == model.InvalidBackendRefTgId {
+				l.log.Debugf("Rule TG has an invalid backendref, setting TG id to invalid")
+				rtg.LatticeTgId = model.InvalidBackendRefTgId
+				continue
+			}
+
+			l.log.Debugf("Fetching TG %d from the stack (ID %s)", i, rtg.StackTargetGroupId)
+
+			stackTg := &model.TargetGroup{}
+			err := l.stack.GetResource(rtg.StackTargetGroupId, stackTg)
+			if err != nil {
+				return err
+			}
+
+			if stackTg.Status == nil {
+				return errors.New("stack target group is missing Status field")
+			}
+			l.log.Debugf("Updating TG id: %v", stackTg.Status.Id)
+			rtg.LatticeTgId = stackTg.Status.Id
+		}
+
+		if rtg.SvcImportTG != nil {
+			l.log.Debugf("Getting target group for service import %s %s (%s, %s)",
+				rtg.SvcImportTG.K8SServiceName, rtg.SvcImportTG.K8SServiceNamespace,
+				rtg.SvcImportTG.K8SClusterName, rtg.SvcImportTG.VpcId)
+			tgId, err := l.findSvcExportTG(ctx, *rtg.SvcImportTG)
+
+			if err != nil {
+				return err
+			}
+			rtg.LatticeTgId = tgId
+		}
+
 	}
 
 	return nil
