@@ -79,16 +79,12 @@ func (d *defaultListenerManager) Upsert(
 		FixedResponse: &defaultResp,
 	}
 
-	fmt.Printf("liwwu modelListener >>> %v\n", modelListener.Spec)
 	// need to find out the 1st rule
 	if modelListener.Spec.Protocol == "TLS_PASSTHROUGH" {
-
-		fmt.Printf("liwwu >> modelTGList = %v\n", modelTGList)
 
 		var latticeTGs []*vpclattice.WeightedTargetGroup
 
 		for _, modelTG := range modelTGList {
-			fmt.Printf("liwwu >> modelTG: %v \n", modelTG)
 			latticeTG := vpclattice.WeightedTargetGroup{
 				TargetGroupIdentifier: aws.String(modelTG.LatticeTgId),
 				Weight:                aws.Int64(modelTG.Weight),
@@ -97,13 +93,14 @@ func (d *defaultListenerManager) Upsert(
 			latticeTGs = append(latticeTGs, &latticeTG)
 		}
 
+		d.log.Debugf("For TLS_PASSTHROUGH listener, forward to default target groups %v", latticeTGs)
+
 		action = vpclattice.RuleAction{
 			Forward: &vpclattice.ForwardAction{
 				TargetGroups: latticeTGs,
 			},
 		}
 
-		fmt.Printf("liwwu >>> action = %v \n", action)
 	}
 	listenerInput := vpclattice.CreateListenerInput{
 		ClientToken:       nil,
