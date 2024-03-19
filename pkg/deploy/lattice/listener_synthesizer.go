@@ -51,6 +51,7 @@ func (l *listenerSynthesizer) Synthesize(ctx context.Context) error {
 
 		var stackRules []*model.Rule
 		_ = l.stack.ListResources(&stackRules)
+		var moduleTG []*model.RuleTargetGroup
 
 		if listener.Spec.Protocol == "TLS_PASSTHROUGH" {
 			err := l.updateTGId(ctx, stackRules)
@@ -59,10 +60,10 @@ func (l *listenerSynthesizer) Synthesize(ctx context.Context) error {
 				l.log.Infof("Failed to update TGId, err = %v", err)
 				return err
 			}
+			moduleTG = stackRules[0].Spec.Action.TargetGroups
 		}
 
-		
-		status, err := l.listenerMgr.Upsert(ctx, listener, svc, stackRules[0].Spec.Action.TargetGroups)
+		status, err := l.listenerMgr.Upsert(ctx, listener, svc, moduleTG)
 		if err != nil {
 			listenerErr = errors.Join(listenerErr,
 				fmt.Errorf("failed ListenerManager.Upsert %s-%s due to err %s",

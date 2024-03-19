@@ -165,7 +165,7 @@ func (r *ruleSynthesizer) createOrUpdateRules(ctx context.Context, rule *model.R
 	}
 
 	if stackListener.Spec.Protocol == "TLS_PASSTHROUGH" {
-		r.log.Debugf("Skip updating rule=%v, since it is  TLS_PASSTHROUGH listener", * rule)
+		r.log.Debugf("Skip updating rule=%v, since it is  TLS_PASSTHROUGH listener", *rule)
 		return nil
 	}
 

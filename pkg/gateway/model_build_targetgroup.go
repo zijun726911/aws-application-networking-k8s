@@ -155,7 +155,7 @@ func (t *svcExportTargetGroupModelBuildTask) buildTargetGroup(ctx context.Contex
 
 	tgp, err := t.tgp.ObjResolvedPolicy(ctx, t.serviceExport)
 	t.log.Debugf("Resolving TG Policy for serviceExport=%v, TargetGroup=%v, err = %v",
-t.serviceExport, tgp, err)
+		t.serviceExport, tgp, err)
 	if err != nil {
 		return nil, err
 	}
