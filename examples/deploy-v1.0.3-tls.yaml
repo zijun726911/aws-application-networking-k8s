@@ -7863,11 +7863,6 @@ spec:
         command:
         - /manager
         image: public.ecr.aws/x2j8p8w7/alpha-aws-gateway-controller:v1
-        env:
-          - name: LATTICE_ENDPOINT
-            value: "https://mercury-gamma.us-west-2.amazonaws.com"
-          - name: DEFAULT_SERVICE_NETWORK
-            value: "my-hotel-tls"
         livenessProbe:
           httpGet:
             path: /healthz
