@@ -76,7 +76,7 @@ apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: TLSRoute
 metadata:
   annotations:
-    application-networking.k8s.aws/lattice-assigned-domain-name: nginx-tls-default-0ddade421111c485e.7d67968.mercury-svcs-gamma.us-west-2.on.aws
+    application-networking.k8s.aws/lattice-assigned-domain-name: nginx-tls-default-0ddade421111c485e.7d67968.lattice.us-west-2.on.aws
     ...
   name: nginx-tls
   namespace: default

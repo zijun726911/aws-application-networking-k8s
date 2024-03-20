@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: nginx-tls
-        image: 694065802095.dkr.ecr.us-west-2.amazonaws.com/nginx-server:latest 
+        image: public.ecr.aws/x2j8p8w7/lattice-test-server:latest 
         ports:
         - containerPort: 443
 
