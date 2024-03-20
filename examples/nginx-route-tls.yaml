@@ -1,10 +1,10 @@
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: HTTPRoute
+apiVersion: gateway.networking.k8s.io/v1alpha2
+kind: TLSRoute
 metadata:
   name: nginx-tls
 spec:
   hostnames:
-  - tls-nginx.my-test.com
+  - nginx-test.my-test.com
   parentRefs:
   - name: my-hotel-tls
     sectionName: tls
