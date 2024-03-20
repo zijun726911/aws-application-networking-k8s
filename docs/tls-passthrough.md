@@ -9,6 +9,7 @@
 Here is [TLSRoute CRD](https://github.com/liwenwu-amazon/aws-application-networking-k8-publics/blob/tls-route-support/config/crds/bases/gateway.networking.k8s.io_tlsroutes.yaml).
 
 
+Here is alpha branch repo: https://github.com/liwenwu-amazon/aws-application-networking-k8-publics/tree/tls-route-support
 
 ```
 # clone the TLS support alpha repo
