@@ -70,70 +70,10 @@ var _ = Describe("TLSRoute test", func() {
 				Equal(vpclattice.TargetStatusHealthy),
 			))
 		}
-/*
-		log.Println("Verifying VPC lattice service listeners and rules")
-		Eventually(func(g Gomega) {
-			listListenerResp, err := testFramework.LatticeClient.ListListenersWithContext(ctx, &vpclattice.ListListenersInput{
-				ServiceIdentifier: vpcLatticeService.Id,
-			})
-			g.Expect(err).To(BeNil())
-			g.Expect(len(listListenerResp.Items)).To(BeEquivalentTo(1))
-			listener := listListenerResp.Items[0]
-			g.Expect(*listener.Port).To(BeEquivalentTo(testGateway.Spec.Listeners[0].Port))
-			listenerId := listener.Id
-			listRulesResp, err := testFramework.LatticeClient.ListRulesWithContext(ctx, &vpclattice.ListRulesInput{
-				ListenerIdentifier: listenerId,
-				ServiceIdentifier:  vpcLatticeService.Id,
-			})
-			nonDefaultRules := lo.Filter(listRulesResp.Items, func(rule *vpclattice.RuleSummary, _ int) bool {
-				return rule.IsDefault == nil || *rule.IsDefault == false
-			})
-			ruleIds := lo.Map(nonDefaultRules, func(rule *vpclattice.RuleSummary, _ int) *string {
-				return rule.Id
-			})
-
-			g.Expect(len(ruleIds)).To(Equal(2))
-
-			rule0, err := testFramework.LatticeClient.GetRuleWithContext(ctx, &vpclattice.GetRuleInput{
-				ServiceIdentifier:  vpcLatticeService.Id,
-				ListenerIdentifier: listenerId,
-				RuleIdentifier:     ruleIds[0],
-			})
-			g.Expect(err).To(BeNil())
-
-			rule1, err := testFramework.LatticeClient.GetRuleWithContext(ctx, &vpclattice.GetRuleInput{
-				ServiceIdentifier:  vpcLatticeService.Id,
-				ListenerIdentifier: listenerId,
-				RuleIdentifier:     ruleIds[1],
-			})
-			tlsrouteRules := tlsRoute.Spec.Rules
-
-   fmt.Printf("rule0 = %v, rule1 = %v tlsrouteRules = %v \n", rule0, rule1, tlsrouteRules)
-
-			g.Expect(err).To(BeNil())
-
-			retrievedRules := []string{
-				*rule0.Match.HttpMatch.PathMatch.Match.Prefix,
-				*rule1.Match.HttpMatch.PathMatch.Match.Prefix}
-			expectedRules := []string{*httprouteRules[0].Matches[0].Path.Value,
-				*httprouteRules[1].Matches[0].Path.Value}
-			log.Println("retrievedRules", retrievedRules)
-			log.Println("expectedRules", expectedRules)
-
-			g.Expect(retrievedRules).To(
-				ContainElements(expectedRules))
-
-		}).WithOffset(1).Should(Succeed())
-*/
 		log.Println("Verifying traffic")
-        log.Println(">>>>>>>>>>>>>> Liwen Wu >>>>>>>>>>>>>>>>>>>>")
-		//time.Sleep(900 * time.Second)
 		dnsName := testFramework.GetVpcLatticeServiceTLSDns(tlsRoute.Name, tlsRoute.Namespace)
-		fmt.Printf("dnsName : >>>> %v \n", dnsName)
 
-		dnsIP, err := net.LookupIP(dnsName)
-
-		fmt.Printf("liwwu >>> DNS=%v, IP=%v ,err = %d\n", dnsName, dnsIP, err)
+		dnsIP, _:= net.LookupIP(dnsName)
 
 		testFramework.Get(ctx, types.NamespacedName{Name: deployment1.Name, Namespace: deployment1.Namespace}, deployment1)
 
@@ -143,7 +83,7 @@ var _ = Describe("TLSRoute test", func() {
 		pod := pods[0]
 
 		Eventually(func(g Gomega) {
-			cmd := fmt.Sprintf("curl -k https://tls.test.com:444 --resolve tls.test.com:444:169.254.171.32" )
+			cmd := fmt.Sprintf("curl -k https://tls.test.com:444 --resolve tls.test.com:444:%s", dnsIP[0] )
 			stdout, _, err := testFramework.PodExec(pod, cmd)
 			g.Expect(err).To(BeNil())
 			g.Expect(stdout).To(ContainSubstring("my-https-1 handler pod"))
