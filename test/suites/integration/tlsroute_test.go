@@ -5,6 +5,7 @@ import (
 	"log"
 	 "os"
 	"time"
+	"net"
 
  	"github.com/aws/aws-sdk-go/service/vpclattice"
 	. "github.com/onsi/ginkgo/v2"
@@ -126,8 +127,13 @@ var _ = Describe("TLSRoute test", func() {
 */
 		log.Println("Verifying traffic")
         log.Println(">>>>>>>>>>>>>> Liwen Wu >>>>>>>>>>>>>>>>>>>>")
-		time.Sleep(900 * time.Second)
-		dnsName := testFramework.GetVpcLatticeServiceDns(tlsRoute.Name, tlsRoute.Namespace)
+		//time.Sleep(900 * time.Second)
+		dnsName := testFramework.GetVpcLatticeServiceTLSDns(tlsRoute.Name, tlsRoute.Namespace)
+		fmt.Printf("dnsName : >>>> %v \n", dnsName)
+
+		dnsIP, err := net.LookupIP(dnsName)
+
+		fmt.Printf("liwwu >>> DNS=%v, IP=%v ,err = %d\n", dnsName, dnsIP, err)
 
 		testFramework.Get(ctx, types.NamespacedName{Name: deployment1.Name, Namespace: deployment1.Namespace}, deployment1)
 
@@ -137,17 +143,17 @@ var _ = Describe("TLSRoute test", func() {
 		pod := pods[0]
 
 		Eventually(func(g Gomega) {
-			cmd := fmt.Sprintf("curl %s/pathmatch0", dnsName)
+			cmd := fmt.Sprintf("curl -k https://tls.test.com:444 --resolve tls.test.com:444:169.254.171.32" )
 			stdout, _, err := testFramework.PodExec(pod, cmd)
 			g.Expect(err).To(BeNil())
-			g.Expect(stdout).To(ContainSubstring("test-v1 handler pod"))
+			g.Expect(stdout).To(ContainSubstring("my-https-1 handler pod"))
 		}).WithTimeout(30 * time.Second).WithOffset(1).Should(Succeed())
 
 	})
 
 	AfterEach(func() {
 		testFramework.ExpectDeletedThenNotFound(ctx,
-			//tlsRoute,
+			tlsRoute,
 			deployment1,
 			service1,
 		)

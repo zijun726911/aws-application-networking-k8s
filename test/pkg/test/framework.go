@@ -570,6 +570,19 @@ func (env *Framework) GetVpcLatticeServiceDns(httpRouteName string, httpRouteNam
 	return vpcLatticeServiceDns
 }
 
+func (env *Framework) GetVpcLatticeServiceTLSDns(httpRouteName string, httpRouteNamespace string) string {
+	env.Log.Infoln("GetVpcLatticeServiceTLSDns: ", httpRouteName, httpRouteNamespace)
+	vpcLatticeServiceDns := ""
+	Eventually(func(g Gomega) {
+		tlsroute := gwv1alpha2.TLSRoute{}
+		env.Get(env.ctx, types.NamespacedName{Name: httpRouteName, Namespace: httpRouteNamespace}, &tlsroute)
+		g.Expect(tlsroute.Annotations).To(HaveKey(controllers.LatticeAssignedDomainName))
+		vpcLatticeServiceDns = tlsroute.Annotations[controllers.LatticeAssignedDomainName]
+	}).Should(Succeed())
+
+	return vpcLatticeServiceDns
+}
+
 type RunGrpcurlCmdOptions struct {
 	GrpcServerHostName  string
 	GrpcServerPort      string
