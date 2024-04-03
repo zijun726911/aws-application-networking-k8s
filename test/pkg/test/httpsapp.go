@@ -19,10 +19,10 @@ type HTTPsAppOptions struct {
 
 func (env *Framework) NewHttpsApp(options HTTPsAppOptions) (*appsv1.Deployment, *v1.Service) {
 	if options.Port == 0 {
-		options.Port = 80
+		options.Port = 443
 	}
 	if options.TargetPort == 0 {
-		options.TargetPort = 8090
+		options.TargetPort = 443
 	}
 	deployment := New(&appsv1.Deployment{
 		ObjectMeta: metav1.ObjectMeta{

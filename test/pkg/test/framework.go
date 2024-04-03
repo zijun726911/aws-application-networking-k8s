@@ -348,6 +348,10 @@ func (env *Framework) GetTargetGroup(ctx context.Context, service *corev1.Servic
 	return env.GetTargetGroupWithProtocol(ctx, service, vpclattice.TargetGroupProtocolHttp, vpclattice.TargetGroupProtocolVersionHttp1)
 }
 
+func (env *Framework) GetTCPTargetGroup(ctx context.Context, service *corev1.Service) *vpclattice.TargetGroupSummary {
+	return env.GetTargetGroupWithProtocol(ctx, service, "TCP", vpclattice.TargetGroupProtocolVersionHttp1)
+}
+
 func (env *Framework) GetTargetGroupWithProtocol(ctx context.Context, service *corev1.Service, protocol, protocolVersion string) *vpclattice.TargetGroupSummary {
 	tgSpec := model.TargetGroupSpec{
 		TargetGroupTagFields: model.TargetGroupTagFields{
