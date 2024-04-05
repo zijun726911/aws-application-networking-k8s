@@ -28,7 +28,7 @@ import (
 	anv1alpha1 "github.com/aws/aws-application-networking-k8s/pkg/apis/applicationnetworking/v1alpha1"
 )
 
-var _ = Describe("TLSRoute test", func() {
+var _ = Describe("TLSRoute2ServiceImport test", func() {
 	var (
 		deployment1        *appsv1.Deployment
 		service1           *v1.Service
