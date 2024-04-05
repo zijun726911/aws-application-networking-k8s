@@ -122,6 +122,8 @@ func GetParentRefType(s string) K8SSourceType {
 		return SourceTypeGRPCRoute
 	case string(SourceTypeSvcExport):
 		return SourceTypeSvcExport
+	case string(SourceTypeTLSRoute):
+		return SourceTypeTLSRoute	
 	default:
 		return SourceTypeInvalid
 	}
