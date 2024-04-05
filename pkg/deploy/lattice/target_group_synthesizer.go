@@ -275,6 +275,11 @@ func (t *TargetGroupSynthesizer) shouldDeleteRouteTg(
 		route, err = core.GetGRPCRoute(ctx, t.client, routeName)
 	} else {
 		route, err = core.GetHTTPRoute(ctx, t.client, routeName)
+
+		if err != nil {
+			t.log.Debugf("Trying to see if TG is referenced by a TLSRoute")
+			route, err = core.GetTLSRoute(ctx, t.client, routeName)
+		}
 	}
 	// TODO what about TCP route
 
