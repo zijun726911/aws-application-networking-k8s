@@ -7,10 +7,10 @@ frontend:
         - python3 -m pip install mkdocs-material mike
     build:
       commands:
-        - export PATH=$PATH:$(python3 -m site --user-base)/bin
-#        - find / -name mike -type f
-        - python3 -m mike --version  # For debugging to confirm installation
-        - PATH=$PATH:$(python3 -m site --user-base)/bin; mike deploy 1.0.5 latest
+        - MIKE_PATH=$(pyenv root)/bin/mike  # Set the path to mike
+        - echo "Using mike at: $MIKE_PATH"  # For debugging, confirm the path
+        - $MIKE_PATH --version  # For debugging to confirm installation
+        - $MIKE_PATH deploy 1.0.5 latest --update-aliases  # Deploy using mike
   artifacts:
     baseDirectory: site
     files:
