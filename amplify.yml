@@ -7,9 +7,10 @@ frontend:
         - python3 -m pip install mkdocs-material mike
     build:
       commands:
-        - echo "pyenv python $(pyenv which python)"
-        - export PATH=$PATH:/root/.pyenv/versions/3.10.13/bin
-        - /root/.pyenv/versions/3.10.13/bin/mike deploy 1.0.5 latest  # Deploy using mike
+        - export PATH=$PATH:$(pyenv which python)/..
+        - git config --global user.name "ci bot"  # Set your name or a placeholder name
+        - git config --global user.email "ci-bot@example.com"  # Set your email or a placeholder email
+        - mike deploy 1.0.5 latest  # Deploy using mike
   artifacts:
     baseDirectory: site
     files:
