@@ -2,39 +2,39 @@ site_name: AWS Gateway API Controller
 repo_name: aws/aws-application-networking-k8s
 repo_url: https://github.com/aws/aws-application-networking-k8s
 edit_uri: edit/main/docs/
-site_url:  https://doc-test.d312w6s8pff7l3.amplifyapp.com/
+site_url: https://doc-test.d312w6s8pff7l3.amplifyapp.com/
 strict: true
 site_dir: site
 nav:
   - Home: index.md
   - Concepts:
-    - Introduction: concepts/concepts.md
-    - Concepts: concepts/overview.md
+      - Introduction: concepts/concepts.md
+      - Concepts: concepts/overview.md
   - User Guides:
-    - Controller Installation: guides/deploy.md
-    - Getting Started: guides/getstarted.md
-    - Cross-Account Sharing: guides/ram-sharing.md
-    - Advanced Configurations: guides/advanced-configurations.md
-    - TLS: guides/https.md
-    - Custom Domain Name: guides/custom-domain-name.md
-    - GRPC: guides/grpc.md
-    - Pod Readiness Gate: guides/pod-readiness-gates.md
-    - Configuration: guides/environment.md
+      - Controller Installation: guides/deploy.md
+      - Getting Started: guides/getstarted.md
+      - Cross-Account Sharing: guides/ram-sharing.md
+      - Advanced Configurations: guides/advanced-configurations.md
+      - TLS: guides/https.md
+      - Custom Domain Name: guides/custom-domain-name.md
+      - GRPC: guides/grpc.md
+      - Pod Readiness Gate: guides/pod-readiness-gates.md
+      - Configuration: guides/environment.md
   - API Specification: api-reference.md
   - API Reference:
-    - AccessLogPolicy: api-types/access-log-policy.md
-    - Gateway: api-types/gateway.md
-    - GRPCRoute: api-types/grpc-route.md
-    - HTTPRoute: api-types/http-route.md
-    - IAMAuthPolicy:  api-types/iam-auth-policy.md
-    - Service: api-types/service.md
-    - ServiceExport: api-types/service-export.md
-    - ServiceImport: api-types/service-import.md
-    - TargetGroupPolicy: api-types/target-group-policy.md
-    - VpcAssociationPolicy: api-types/vpc-association-policy.md
+      - AccessLogPolicy: api-types/access-log-policy.md
+      - Gateway: api-types/gateway.md
+      - GRPCRoute: api-types/grpc-route.md
+      - HTTPRoute: api-types/http-route.md
+      - IAMAuthPolicy: api-types/iam-auth-policy.md
+      - Service: api-types/service.md
+      - ServiceExport: api-types/service-export.md
+      - ServiceImport: api-types/service-import.md
+      - TargetGroupPolicy: api-types/target-group-policy.md
+      - VpcAssociationPolicy: api-types/vpc-association-policy.md
   - Contributing:
-    - Developer Guide: contributing/developer.md
-    - Developer Cheat Sheet: contributing/developer-cheat-sheet.md
+      - Developer Guide: contributing/developer.md
+      - Developer Cheat Sheet: contributing/developer-cheat-sheet.md
   - FAQ: faq.md
 
 plugins:
@@ -42,6 +42,9 @@ plugins:
   - mike:
       alias_type: symlink
       canonical_version: latest
+#      version_selector: true
+#      css_dir: assets/stylesheets
+#      javascript_dir: assets/javascripts
 
 theme:
   name: material
@@ -55,6 +58,8 @@ theme:
   features:
     - navigation.instant
     - navigation.instant.progress
+    - navigation.tabs
+    - navigation.sections
 
 #      - navigation.tabs
 #      - navigation.sections
