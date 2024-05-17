@@ -144,7 +144,7 @@ api-reference: ## Update documentation in docs/api-reference.md
 .PHONY: docs
 docs:
 	mkdir -p site
-	mkdocs build
+	mike deploy 1.0.6 latest --update-aliases -b
 
 e2e-webhook-namespace := "webhook-e2e-test"
 

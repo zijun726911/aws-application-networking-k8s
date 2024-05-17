@@ -1,0 +1,16 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - python3 -m pip install -r requirements.txt
+    # IMPORTANT - Please verify your build commands
+    build:
+      commands:
+        - mike deploy 1.0.5 latest
+  artifacts:
+    baseDirectory: /site
+    files:
+      - '**/*'
+  cache:
+    paths: []
