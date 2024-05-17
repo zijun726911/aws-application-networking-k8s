@@ -39,48 +39,40 @@ nav:
 
 plugins:
   - search
-  - mike
+  - mike:
+      alias_type: symlink
+      canonical_version: latest
 
 theme:
   name: material
-  custom_dir: docs/overrides
-  logo: images/controller.png
-  favicon: images/controller.png
-  icon:
-    repo: fontawesome/brands/github
   language: en
   palette:
-    # Palette toggle for light mode
-    - scheme: default
-      toggle:
-        icon: material/toggle-switch
-        name: Switch to dark mode
-      primary: deep purple
-      accent: purple
-    # Palette toggle for dark mode
-    - scheme: slate
-      toggle:
-        icon: material/toggle-switch-off-outline
-        name: Switch to light mode
-      primary: black
-      accent: grey
+    primary: indigo
+    accent: indigo
   font:
     text: Roboto
     code: Roboto Mono
   features:
-      - navigation.tabs
-      - navigation.sections
-      - toc.integrate
-      - navigation.top
-      - navigation.footer
-      - search.suggest
-      - search.highlight
-      - content.tabs.link
-      - content.code.annotation
-      - content.code.copy
-      - content.code.select
-      - navigation.path
-      - versioning
+    - navigation.instant
+    - navigation.instant.progress
+
+#      - navigation.tabs
+#      - navigation.sections
+#      - toc.integrate
+#      - navigation.top
+#      - navigation.footer
+#      - search.suggest
+#      - search.highlight
+#      - content.tabs.link
+#      - content.code.annotation
+#      - content.code.copy
+#      - content.code.select
+#      - navigation.path
+#      - versioning
+extra:
+  version:
+    alias: true
+    provider: mike
 
 # Extensions
 markdown_extensions:
@@ -113,8 +105,3 @@ extra_javascript:
   - https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js
 
 
-extra:
-  generator: false
-  version:
-    provider: mike #mike deploy --update-aliases 0.1 latest
-    site_url: https://doc-test.d312w6s8pff7l3.amplifyapp.com/
