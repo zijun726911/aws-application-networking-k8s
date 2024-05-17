@@ -117,3 +117,4 @@ extra:
   generator: false
   version:
     provider: mike #mike deploy --update-aliases 0.1 latest
+    site_url: https://doc-test.d312w6s8pff7l3.amplifyapp.com/
