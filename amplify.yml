@@ -8,8 +8,9 @@ frontend:
     build:
       commands:
         - export PATH=$PATH:$(python3 -m site --user-base)/bin
-        - mike --version  # For debugging to confirm installation
-        - mike deploy 1.0.5 latest
+        - find / -name mike -type f
+        - python3 -m mike --version  # For debugging to confirm installation
+        - PATH=$PATH:$(python3 -m site --user-base)/bin; mike deploy 1.0.5 latest
   artifacts:
     baseDirectory: site
     files:
