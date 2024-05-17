@@ -7,6 +7,7 @@ frontend:
         - python3 -m pip install mkdocs-material mike
     build:
       commands:
+        - echo "pyenv python: $(pyenv which python)"
         - export PATH=$PATH:/root/.pyenv/versions/3.10.13/bin
         - /root/.pyenv/versions/3.10.13/bin/mike deploy 1.0.5 latest  # Deploy using mike
   artifacts:
