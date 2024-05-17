@@ -6,14 +6,13 @@ frontend:
         - python3 -m pip install --upgrade pip
         - python3 -m pip install mkdocs-material mike
         - PATH=$PATH:$(python3 -m site --user-base)/bin
-    # IMPORTANT - Please verify your build commands
+        - echo "PATH=$PATH"  # For debugging
+        - mike --version  # For debugging to confirm installation
     build:
       commands:
-        - echo $PATH
-        - pip list
         - mike deploy 1.0.5 latest
   artifacts:
-    baseDirectory: /site
+    baseDirectory: site
     files:
       - '**/*'
   cache:
