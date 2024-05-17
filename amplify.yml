@@ -3,7 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - python3 -m pip install -r requirements.txt
+        - python3 -m pip install mkdocs-material mike
     # IMPORTANT - Please verify your build commands
     build:
       commands:
