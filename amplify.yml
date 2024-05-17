@@ -8,7 +8,7 @@ frontend:
     build:
       commands:
         - MIKE_PATH=$(pyenv root)/bin/mike  # Set the path to mike
-        - echo "Using mike at: $MIKE_PATH"  # For debugging, confirm the path
+        - echo "Using mike at $MIKE_PATH"  # For debugging, confirm the path
         - $MIKE_PATH --version  # For debugging to confirm installation
         - $MIKE_PATH deploy 1.0.5 latest --update-aliases  # Deploy using mike
   artifacts:
