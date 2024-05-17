@@ -4,7 +4,7 @@ repo_url: https://github.com/aws/aws-application-networking-k8s
 edit_uri: edit/main/docs/
 site_url:  https://doc-test.d312w6s8pff7l3.amplifyapp.com/
 strict: true
-
+site_dir: site
 nav:
   - Home: index.md
   - Concepts:
@@ -80,6 +80,7 @@ theme:
       - content.code.copy
       - content.code.select
       - navigation.path
+      - versioning
 
 # Extensions
 markdown_extensions:
