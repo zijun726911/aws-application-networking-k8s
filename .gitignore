@@ -3,7 +3,7 @@ coverage.out
 deploy.yaml
 
 # MkDocs documentation
-site*/
+#site*/
 
 # Multi-module go project
 go.work*
