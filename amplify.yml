@@ -8,7 +8,7 @@ frontend:
     build:
       commands:
         - export PATH=$PATH:/root/.pyenv/versions/3.10.13/bin
-        - /root/.pyenv/versions/3.10.13/bin/mike deploy 1.0.5 latest --update-aliases  # Deploy using mike
+        - /root/.pyenv/versions/3.10.13/bin/mike deploy 1.0.5 latest  # Deploy using mike
   artifacts:
     baseDirectory: site
     files:
