@@ -5,7 +5,7 @@ on:
     branches:
       - doc-test
 jobs:
-  putblic-docs:
+  publish-docs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,5 +25,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install mkdocs-material mike
       - name: Build
-        run: mike deploy 1.0.7  latest --update-aliases --push
+        run: mike deploy 1.0.8  latest --update-aliases --push
 
