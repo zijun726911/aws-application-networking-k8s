@@ -15,9 +15,8 @@ frontend:
         - export PATH=$PATH:$(dirname $(pyenv which python3))
         - git config --global user.name "ci-bot"  # Set you r name or a placeholder name
         - git config --global user.email "ci-bot@amazon.com"  # Set your email or a placeholder email
-
-        - mike deploy 1.0.6  latest --update-aliases
         - mike set-default latest
+        - mike deploy 1.0.6  latest --update-aliases
 
   artifacts:
     baseDirectory: site
