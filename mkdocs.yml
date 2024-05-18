@@ -32,6 +32,7 @@ nav:
       - ServiceImport: api-types/service-import.md
       - TargetGroupPolicy: api-types/target-group-policy.md
       - VpcAssociationPolicy: api-types/vpc-association-policy.md
+      - Conformance Test: conformance-test.md
   - Contributing:
       - Developer Guide: contributing/developer.md
       - Developer Cheat Sheet: contributing/developer-cheat-sheet.md
@@ -42,7 +43,7 @@ plugins:
   - mike:
       alias_type: symlink
       canonical_version: latest
-#      version_selector: true
+      version_selector: true
 #      css_dir: assets/stylesheets
 #      javascript_dir: assets/javascripts
 
@@ -78,32 +79,32 @@ extra:
   version:
     alias: true
     provider: mike
-
-# Extensions
-markdown_extensions:
-  - admonition
-  - attr_list
-  - codehilite
-  - md_in_html
-  - pymdownx.inlinehilite
-  - pymdownx.tasklist:
-      custom_checkbox: true
-  - pymdownx.superfences
-  - pymdownx.tabbed:
-      alternate_style: true
-  - pymdownx.highlight:
-      anchor_linenums: true
-  - pymdownx.snippets
-  - pymdownx.arithmatex:
-      generic: true
-  - footnotes
-  - pymdownx.details
-  - pymdownx.mark
-  - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
-  - toc:
-      permalink: true
+#
+## Extensions
+#markdown_extensions:
+#  - admonition
+#  - attr_list
+#  - codehilite
+#  - md_in_html
+#  - pymdownx.inlinehilite
+#  - pymdownx.tasklist:
+#      custom_checkbox: true
+#  - pymdownx.superfences
+#  - pymdownx.tabbed:
+#      alternate_style: true
+#  - pymdownx.highlight:
+#      anchor_linenums: true
+#  - pymdownx.snippets
+#  - pymdownx.arithmatex:
+#      generic: true
+#  - footnotes
+#  - pymdownx.details
+#  - pymdownx.mark
+#  - pymdownx.emoji:
+#      emoji_index: !!python/name:material.extensions.emoji.twemoji
+#      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+#  - toc:
+#      permalink: true
 extra_css:
   - https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css
 extra_javascript:
