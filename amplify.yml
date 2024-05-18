@@ -3,8 +3,9 @@ frontend:
   phases:
     preBuild:
       commands:
-        - git fetch origin gh-pages --depth=1
-        - git checkout  gh-pages
+        - git fetch origin gh-pages:refs/remotes/origin/gh-pages --depth=1
+        - git checkout -b gh-pages origin/gh-pages
+        - git branch  # Verify that gh-pages is checked out
         - git checkout -
         - git branch
         - python3 -m pip install --upgrade pip
