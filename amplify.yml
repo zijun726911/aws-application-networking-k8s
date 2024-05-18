@@ -3,7 +3,8 @@ frontend:
   phases:
     preBuild:
       commands:
-
+        - git fetch origin gh-pages --depth=1
+        - git branch
         - python3 -m pip install --upgrade pip
         - python3 -m pip install mkdocs-material mike
     build:
@@ -11,10 +12,10 @@ frontend:
         - export PATH=$PATH:$(dirname $(pyenv which python3))
         - git config --global user.name "ci-bot"  # Set you r name or a placeholder name
         - git config --global user.email "ci-bot@amazon.com"  # Set your email or a placeholder email
-        - git fetch origin gh-pages --depth=1
-        - git branch
-        - mike set-default latest
+
         - mike deploy 1.0.6  latest --update-aliases
+        - mike set-default latest
+
   artifacts:
     baseDirectory: site
     files:
