@@ -16,8 +16,7 @@ frontend:
         - git config --global user.name "ci-bot"  # Set you r name or a placeholder name
         - git config --global user.email "ci-bot@amazon.com"  # Set your email or a placeholder email
         - mike set-default latest
-        - mike deploy 1.0.6  latest --update-aliases
-
+        - mike deploy 1.0.6  latest --update-aliases --push
   artifacts:
     baseDirectory: site
     files:

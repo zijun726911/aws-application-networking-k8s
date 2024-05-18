@@ -44,8 +44,6 @@ plugins:
       alias_type: symlink
       canonical_version: latest
       version_selector: true
-#      css_dir: assets/stylesheets
-#      javascript_dir: assets/javascripts
 
 theme:
   name: material
@@ -62,52 +60,11 @@ theme:
     - navigation.tabs
     - navigation.sections
 
-#      - navigation.tabs
-#      - navigation.sections
-#      - toc.integrate
-#      - navigation.top
-#      - navigation.footer
-#      - search.suggest
-#      - search.highlight
-#      - content.tabs.link
-#      - content.code.annotation
-#      - content.code.copy
-#      - content.code.select
-#      - navigation.path
-#      - versioning
 extra:
   version:
-    alias: true
     provider: mike
-#
-## Extensions
-#markdown_extensions:
-#  - admonition
-#  - attr_list
-#  - codehilite
-#  - md_in_html
-#  - pymdownx.inlinehilite
-#  - pymdownx.tasklist:
-#      custom_checkbox: true
-#  - pymdownx.superfences
-#  - pymdownx.tabbed:
-#      alternate_style: true
-#  - pymdownx.highlight:
-#      anchor_linenums: true
-#  - pymdownx.snippets
-#  - pymdownx.arithmatex:
-#      generic: true
-#  - footnotes
-#  - pymdownx.details
-#  - pymdownx.mark
-#  - pymdownx.emoji:
-#      emoji_index: !!python/name:material.extensions.emoji.twemoji
-#      emoji_generator: !!python/name:material.extensions.emoji.to_svg
-#  - toc:
-#      permalink: true
+
 extra_css:
   - https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css
 extra_javascript:
   - https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js
-
-
