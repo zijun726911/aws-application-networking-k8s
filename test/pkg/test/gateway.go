@@ -23,7 +23,7 @@ func (env *Framework) NewGateway(name string, namespace string) *gwv1.Gateway {
 						Name:     "http",
 						Protocol: gwv1.HTTPProtocolType,
 						Port:     80,
-					},
+					},				
 					{
 						Name:     "https",
 						Protocol: gwv1.HTTPSProtocolType,
@@ -35,6 +35,14 @@ func (env *Framework) NewGateway(name string, namespace string) *gwv1.Gateway {
 									Name: "dummy",
 								},
 							},
+						},
+					},
+					{
+						Name:     "tls",
+						Protocol: gwv1.TLSProtocolType,
+						Port:     444,
+						TLS: &gwv1.GatewayTLSConfig{
+							Mode: lo.ToPtr(gwv1.TLSModePassthrough),
 						},
 					},
 				},

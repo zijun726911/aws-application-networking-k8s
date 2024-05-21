@@ -69,6 +69,7 @@ const (
 	SourceTypeSvcExport K8SSourceType = "ServiceExport"
 	SourceTypeHTTPRoute K8SSourceType = "HTTPRoute"
 	SourceTypeGRPCRoute K8SSourceType = "GRPCRoute"
+	SourceTypeTLSRoute  K8SSourceType = "TLSRoute"
 	SourceTypeInvalid   K8SSourceType = "INVALID"
 )
 
@@ -121,6 +122,8 @@ func GetParentRefType(s string) K8SSourceType {
 		return SourceTypeGRPCRoute
 	case string(SourceTypeSvcExport):
 		return SourceTypeSvcExport
+	case string(SourceTypeTLSRoute):
+		return SourceTypeTLSRoute	
 	default:
 		return SourceTypeInvalid
 	}
@@ -157,7 +160,8 @@ func (t *TargetGroupTagFields) IsSourceTypeServiceExport() bool {
 
 func (t *TargetGroupTagFields) IsSourceTypeRoute() bool {
 	return t.K8SSourceType == SourceTypeHTTPRoute ||
-		t.K8SSourceType == SourceTypeGRPCRoute
+		t.K8SSourceType == SourceTypeGRPCRoute ||
+		t.K8SSourceType == SourceTypeTLSRoute
 }
 
 func (t *TargetGroupSpec) Validate() error {

@@ -17,6 +17,7 @@ func Test_SynthesizeListenerCreate(t *testing.T) {
 	defer c.Finish()
 	ctx := context.TODO()
 	mockListenerMgr := NewMockListenerManager(c)
+	mockTargetGroupManager := NewMockTargetGroupManager(c)
 
 	stack := core.NewDefaultStack(core.StackID{Name: "foo", Namespace: "bar"})
 
@@ -34,12 +35,12 @@ func Test_SynthesizeListenerCreate(t *testing.T) {
 	}
 	assert.NoError(t, stack.AddResource(l))
 
-	mockListenerMgr.EXPECT().Upsert(ctx, gomock.Any(), gomock.Any()).Return(
+	mockListenerMgr.EXPECT().Upsert(ctx, gomock.Any(), gomock.Any(), gomock.Any()).Return(
 		model.ListenerStatus{Id: "new-listener-id"}, nil)
 
 	mockListenerMgr.EXPECT().List(ctx, gomock.Any()).Return([]*vpclattice.ListenerSummary{}, nil)
 
-	ls := NewListenerSynthesizer(gwlog.FallbackLogger, mockListenerMgr, stack)
+	ls := NewListenerSynthesizer(gwlog.FallbackLogger, mockListenerMgr, mockTargetGroupManager, stack)
 	err := ls.Synthesize(ctx)
 	assert.Nil(t, err)
 }
@@ -49,6 +50,7 @@ func Test_SynthesizeListenerCreateWithReconcile(t *testing.T) {
 	defer c.Finish()
 	ctx := context.TODO()
 	mockListenerMgr := NewMockListenerManager(c)
+	mockTargetGroupManager := NewMockTargetGroupManager(c)
 
 	stack := core.NewDefaultStack(core.StackID{Name: "foo", Namespace: "bar"})
 
@@ -67,7 +69,7 @@ func Test_SynthesizeListenerCreateWithReconcile(t *testing.T) {
 	}
 	assert.NoError(t, stack.AddResource(l))
 
-	mockListenerMgr.EXPECT().Upsert(ctx, gomock.Any(), gomock.Any()).Return(
+	mockListenerMgr.EXPECT().Upsert(ctx, gomock.Any(), gomock.Any(), gomock.Any()).Return(
 		model.ListenerStatus{Id: "new-listener-id"}, nil)
 
 	mockListenerMgr.EXPECT().List(ctx, gomock.Any()).Return([]*vpclattice.ListenerSummary{
@@ -84,7 +86,7 @@ func Test_SynthesizeListenerCreateWithReconcile(t *testing.T) {
 			return nil
 		})
 
-	ls := NewListenerSynthesizer(gwlog.FallbackLogger, mockListenerMgr, stack)
+	ls := NewListenerSynthesizer(gwlog.FallbackLogger, mockListenerMgr, mockTargetGroupManager, stack)
 	err := ls.Synthesize(ctx)
 	assert.Nil(t, err)
 }

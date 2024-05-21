@@ -70,6 +70,10 @@ func (s *defaultTargetGroupManager) create(ctx context.Context, modelTg *model.T
 		HealthCheck:     modelTg.Spec.HealthCheckConfig,
 	}
 
+	if modelTg.Spec.Protocol == "TCP" {
+		latticeTgCfg.ProtocolVersion = nil
+	}
+
 	latticeTgType := string(modelTg.Spec.Type)
 
 	latticeTgName := model.GenerateTgName(modelTg.Spec)
@@ -278,6 +282,7 @@ func (s *defaultTargetGroupManager) findTargetGroup(
 ) (*vpclattice.GetTargetGroupOutput, error) {
 	arns, err := s.cloud.Tagging().FindResourcesByTags(ctx, services.ResourceTypeTargetGroup,
 		model.TagsFromTGTagFields(modelTargetGroup.Spec.TargetGroupTagFields))
+
 	if err != nil {
 		return nil, err
 	}

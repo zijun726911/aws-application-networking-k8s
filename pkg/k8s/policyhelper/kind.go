@@ -26,6 +26,8 @@ func ObjToGroupKind(obj client.Object) GroupKind {
 		return GroupKind{anv1alpha1.GroupName, "ServiceExport"}
 	case *corev1.Service:
 		return GroupKind{corev1.GroupName, "Service"}
+	case *anv1alpha1.ServiceExport:
+		return GroupKind{anv1alpha1.GroupName, "ServiceExport"}
 	default:
 		return GroupKind{}
 	}

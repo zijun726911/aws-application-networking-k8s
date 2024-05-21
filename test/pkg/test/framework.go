@@ -352,6 +352,10 @@ func (env *Framework) GetTargetGroup(ctx context.Context, service *corev1.Servic
 	return env.GetTargetGroupWithProtocol(ctx, service, vpclattice.TargetGroupProtocolHttp, vpclattice.TargetGroupProtocolVersionHttp1)
 }
 
+func (env *Framework) GetTCPTargetGroup(ctx context.Context, service *corev1.Service) *vpclattice.TargetGroupSummary {
+	return env.GetTargetGroupWithProtocol(ctx, service, "TCP", vpclattice.TargetGroupProtocolVersionHttp1)
+}
+
 func (env *Framework) GetTargetGroupWithProtocol(ctx context.Context, service *corev1.Service, protocol, protocolVersion string) *vpclattice.TargetGroupSummary {
 	tgSpec := model.TargetGroupSpec{
 		TargetGroupTagFields: model.TargetGroupTagFields{
@@ -565,6 +569,19 @@ func (env *Framework) GetVpcLatticeServiceDns(httpRouteName string, httpRouteNam
 		env.Get(env.ctx, types.NamespacedName{Name: httpRouteName, Namespace: httpRouteNamespace}, &httproute)
 		g.Expect(httproute.Annotations).To(HaveKey(controllers.LatticeAssignedDomainName))
 		vpcLatticeServiceDns = httproute.Annotations[controllers.LatticeAssignedDomainName]
+	}).Should(Succeed())
+
+	return vpcLatticeServiceDns
+}
+
+func (env *Framework) GetVpcLatticeServiceTLSDns(httpRouteName string, httpRouteNamespace string) string {
+	env.Log.Infoln("GetVpcLatticeServiceTLSDns: ", httpRouteName, httpRouteNamespace)
+	vpcLatticeServiceDns := ""
+	Eventually(func(g Gomega) {
+		tlsroute := gwv1alpha2.TLSRoute{}
+		env.Get(env.ctx, types.NamespacedName{Name: httpRouteName, Namespace: httpRouteNamespace}, &tlsroute)
+		g.Expect(tlsroute.Annotations).To(HaveKey(controllers.LatticeAssignedDomainName))
+		vpcLatticeServiceDns = tlsroute.Annotations[controllers.LatticeAssignedDomainName]
 	}).Should(Succeed())
 
 	return vpcLatticeServiceDns

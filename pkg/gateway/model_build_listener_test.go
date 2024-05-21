@@ -25,6 +25,7 @@ func PortNumberPtr(p int) *gwv1beta1.PortNumber {
 
 func Test_ListenerModelBuild(t *testing.T) {
 	var httpSectionName gwv1beta1.SectionName = "http"
+	var tlsSectionName gwv1beta1.SectionName = "tls"
 	var missingSectionName gwv1beta1.SectionName = "miss"
 	var serviceKind gwv1beta1.Kind = "Service"
 	var backendRef = gwv1beta1.BackendRef{
@@ -42,6 +43,7 @@ func Test_ListenerModelBuild(t *testing.T) {
 		k8sGetGatewayCall  bool
 		k8sGatewayReturnOK bool
 		tlsTerminate       bool
+		tlsPassthrough     bool
 		expectedSpec       []model.ListenerSpec
 	}{
 		{
@@ -51,6 +53,7 @@ func Test_ListenerModelBuild(t *testing.T) {
 			k8sGetGatewayCall:  true,
 			k8sGatewayReturnOK: true,
 			tlsTerminate:       false,
+			tlsPassthrough:     false,
 			route: core.NewHTTPRoute(gwv1beta1.HTTPRoute{
 				ObjectMeta: metav1.ObjectMeta{
 					Name:      "service1",
@@ -93,6 +96,7 @@ func Test_ListenerModelBuild(t *testing.T) {
 			k8sGetGatewayCall:  true,
 			k8sGatewayReturnOK: true,
 			tlsTerminate:       true,
+			tlsPassthrough:     false,
 			route: core.NewHTTPRoute(gwv1beta1.HTTPRoute{
 				ObjectMeta: metav1.ObjectMeta{
 					Name:      "service1",
@@ -125,6 +129,49 @@ func Test_ListenerModelBuild(t *testing.T) {
 					K8SRouteNamespace: "default",
 					Port:              443,
 					Protocol:          "HTTPS",
+				},
+			},
+		},
+		{
+			name:               "tls passthrough listener",
+			gwListenerPort:     *PortNumberPtr(443),
+			wantErrIsNil:       true,
+			k8sGetGatewayCall:  true,
+			k8sGatewayReturnOK: true,
+			tlsTerminate:       false,
+			tlsPassthrough:     true,
+			route: core.NewHTTPRoute(gwv1beta1.HTTPRoute{
+				ObjectMeta: metav1.ObjectMeta{
+					Name:      "service1",
+					Namespace: "default",
+				},
+				Spec: gwv1beta1.HTTPRouteSpec{
+					CommonRouteSpec: gwv1beta1.CommonRouteSpec{
+						ParentRefs: []gwv1beta1.ParentReference{
+							{
+								Name:        "gw1",
+								SectionName: &tlsSectionName,
+							},
+						},
+					},
+					Rules: []gwv1beta1.HTTPRouteRule{
+						{
+							BackendRefs: []gwv1beta1.HTTPBackendRef{
+								{
+									BackendRef: backendRef,
+								},
+							},
+						},
+					},
+				},
+			}),
+			expectedSpec: []model.ListenerSpec{
+				{
+					StackServiceId:    "svc-id",
+					K8SRouteName:      "service1",
+					K8SRouteNamespace: "default",
+					Port:              443,
+					Protocol:          "TLS_PASSTHROUGH",
 				},
 			},
 		},
@@ -244,6 +291,15 @@ func Test_ListenerModelBuild(t *testing.T) {
 						if tt.tlsTerminate {
 							listener.Protocol = "HTTPS"
 							mode := gwv1.TLSModeTerminate
+							listener.TLS = &gwv1beta1.GatewayTLSConfig{
+								Mode: &mode,
+							}
+						}
+
+						if tt.tlsPassthrough {
+							listener.Name = tlsSectionName
+							listener.Protocol = "TLS"
+							mode := gwv1.TLSModePassthrough
 							listener.TLS = &gwv1beta1.GatewayTLSConfig{
 								Mode: &mode,
 							}

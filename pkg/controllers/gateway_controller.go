@@ -418,6 +418,12 @@ func UpdateGWListenerStatus(ctx context.Context, k8sClient client.Client, gw *gw
 				})
 			}
 
+			if listener.Protocol == gwv1.TLSProtocolType {
+				listenerStatus.SupportedKinds = append(listenerStatus.SupportedKinds, gwv1beta1.RouteGroupKind{
+					Kind: "TLSRoute",
+				})
+			}
+
 			listenerStatus.SupportedKinds = append(listenerStatus.SupportedKinds, gwv1beta1.RouteGroupKind{
 				Kind: "HTTPRoute",
 			})
@@ -467,6 +473,15 @@ func listenerRouteGroupKindSupported(listener gwv1beta1.Listener) (bool, []gwv1b
 			} else {
 				validRoute = false
 			}
+		} else if routeGroupKind.Kind == "TLSRoute" {
+			if listener.Protocol == gwv1.TLSProtocolType {
+				supportedKinds = append(supportedKinds, gwv1beta1.RouteGroupKind{
+					Kind: "TLSRoute",
+				})
+			} else {
+				validRoute = false
+			}
+
 		} else {
 			validRoute = false
 		}

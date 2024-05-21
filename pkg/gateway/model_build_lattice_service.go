@@ -100,6 +100,10 @@ func (t *latticeServiceModelBuildTask) buildLatticeService(ctx context.Context) 
 		routeType = core.GrpcRouteType
 	}
 
+	if _, ok := t.route.(*core.TLSRoute); ok {
+		routeType = core.TlsRouteType
+	}
+
 	spec := model.ServiceSpec{
 		ServiceTagFields: model.ServiceTagFields{
 			RouteName:      t.route.Name(),

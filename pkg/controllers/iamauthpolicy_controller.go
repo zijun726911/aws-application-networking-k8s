@@ -55,7 +55,7 @@ func RegisterIAMAuthPolicyController(log gwlog.Logger, mgr ctrl.Manager, cloud p
 	b := ctrl.
 		NewControllerManagedBy(mgr).
 		For(&anv1alpha1.IAMAuthPolicy{}, builder.WithPredicates(predicate.GenerationChangedPredicate{}))
-	ph.AddWatchers(b, &gwv1beta1.Gateway{}, &gwv1beta1.HTTPRoute{}, &gwv1alpha2.GRPCRoute{})
+	ph.AddWatchers(b, &gwv1beta1.Gateway{}, &gwv1beta1.HTTPRoute{}, &gwv1alpha2.GRPCRoute{}, &gwv1alpha2.TLSRoute{})
 	err := b.Complete(controller)
 	return err
 }
@@ -65,13 +65,13 @@ func RegisterIAMAuthPolicyController(log gwlog.Logger, mgr ctrl.Manager, cloud p
 // IAMAuthPolicy has a plain text policy field and targetRef.Content of policy is not validated by
 // controller, but Lattice API.
 //
-// TargetRef Kind can be Gatbeway, HTTPRoute, or GRPCRoute. Other Kinds will result in Invalid
+// TargetRef Kind can be Gatbeway, HTTPRoute, or GRPCRoute, TLSRoute. Other Kinds will result in Invalid
 // status.  Policy can be attached to single targetRef only. Attempt to attach more than 1 policy
 // will result in Policy Conflict.  If policies created in sequence, the first one will be in
 // Accepted status, and second in Conflict.  Any following updates to accepted policy will put it
 // into conflicting status, and requires manual resolution - delete conflicting policy.
 //
-// Lattice side. Gateway attaches to Lattice ServiceNetwork, and HTTP/GRPCRoute to Service.  Policy
+// Lattice side. Gateway attaches to Lattice ServiceNetwork, and HTTP/GRPCRoute/TLSRoute to Service.  Policy
 // attachment changes ServiceNetowrk and Service auth-type to IAM, and detachment to
 // NONE. Successful creation of lattice policy updates k8s policy annotation with ARN/Id of Lattice
 // Resouce
